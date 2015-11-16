@@ -44,7 +44,17 @@ class TerrainTile: SCNNode {
         mat.diffuse.wrapT = SCNWrapMode.Repeat
         mat.diffuse.wrapS = SCNWrapMode.Repeat
        // terrainGeometry.firstMaterial = mat
-        self.position = SCNVector3Make(position.x, position.y, 0)
+        self.position = SCNVector3Make(-position.x, 10, position.y)
+//        self.rotation = SCNVector4Make(1, 0, 0, CGFloat( -M_PI_2 ))
+        
+        let xAngle = SCNMatrix4MakeRotation(degToRad(90), 1, 0, 0)
+        let yAngle = SCNMatrix4MakeRotation(degToRad(0), 0, 1, 0)
+        let zAngle = SCNMatrix4MakeRotation(degToRad(180), 0, 0, 1)
+        
+        var rotationMatrix = SCNMatrix4Mult(SCNMatrix4Mult(xAngle, yAngle), zAngle)
+        
+        self.transform = SCNMatrix4Mult(rotationMatrix, self.transform)
+       
         self.geometry = terrainGeometry
         
         
@@ -53,4 +63,8 @@ class TerrainTile: SCNNode {
      required init?(coder aDecoder: NSCoder) {
          fatalError("init(coder:) has not been implemented")
      }
+    
+    func degToRad(deg: Float) -> CGFloat {
+        return CGFloat(deg / 180 * Float(M_PI))
+    }
 }

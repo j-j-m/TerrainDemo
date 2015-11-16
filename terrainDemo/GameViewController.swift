@@ -8,14 +8,26 @@
 
 import SceneKit
 import QuartzCore
+import ModelIO
 
 class GameViewController: NSViewController {
+    
+    let sky = MDLSkyCubeTexture(name: nil,
+        channelEncoding: MDLTextureChannelEncoding.UInt8,
+        textureDimensions: [Int32(160), Int32(160)],
+        turbidity: 0,
+        sunElevation: 0,
+        upperAtmosphereScattering: 0,
+        
+        groundAlbedo: 0)
     
     @IBOutlet weak var gameView: GameView!
     
     override func awakeFromNib(){
         // create a new scene
         let scene = SCNScene()
+        
+        scene.rootNode.addChildNode(SCNNode(geometry:SCNFloor()))
         
         scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(200,200),position:CGPointMake(0, 0), elevation: 5, seaLevel: 0, segmentCount: 100))
         scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(200,200),position:CGPointMake(200, 0), elevation: 5, seaLevel: 0, segmentCount: 100))
@@ -31,10 +43,10 @@ class GameViewController: NSViewController {
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = SCNLightTypeOmni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 100)
+        lightNode.position = SCNVector3(x: 0, y: 100, z: 100)
         scene.rootNode.addChildNode(lightNode)
         
-     
+        scene.background.contents = self.sky.imageFromTexture()?.takeUnretainedValue()
         // set the scene to the view
         self.gameView!.scene = scene
         
@@ -45,7 +57,7 @@ class GameViewController: NSViewController {
       //  self.gameView!.showsStatistics = true
         
         // configure the view
-        self.gameView!.backgroundColor = NSColor.blueColor()
+        self.gameView!.backgroundColor = NSColor.whiteColor()
     }
 
 }
