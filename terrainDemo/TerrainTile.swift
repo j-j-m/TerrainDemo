@@ -17,7 +17,7 @@ import simd
 
 class TerrainTile: SCNNode {
     
-    
+    var mat:SCNMaterial = SCNMaterial()
     /**
      Creates a new planet node with displaced by simplex noise.
      
@@ -38,12 +38,18 @@ class TerrainTile: SCNNode {
         let checkerboard:NSImage = NSImage(named:"checkerboard.png")!
         
         
-        var mat:SCNMaterial = SCNMaterial()
+        
         mat.diffuse.contents = checkerboard
         mat.diffuse.contentsTransform = SCNMatrix4MakeScale(4,4,4);
         mat.diffuse.wrapT = SCNWrapMode.Repeat
         mat.diffuse.wrapS = SCNWrapMode.Repeat
-       // terrainGeometry.firstMaterial = mat
+        
+        mat.shininess = 0.15
+        mat.fresnelExponent = 0.25
+        
+        mat.specular.contents = NSColor.whiteColor()
+        
+        terrainGeometry.materials = [mat]
         self.position = SCNVector3Make(-position.x, 10, position.y)
 //        self.rotation = SCNVector4Make(1, 0, 0, CGFloat( -M_PI_2 ))
         

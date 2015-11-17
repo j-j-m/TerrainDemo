@@ -10,7 +10,14 @@ import SceneKit
 
 class GameView: SCNView {
     var viewDelegate: GameViewDelegate?
+   
     
+    
+
+    override func mouseMoved(theEvent: NSEvent) {
+        super.mouseMoved(theEvent)
+        self.viewDelegate?.didMoveMouse(theEvent)
+    }
     override func mouseDown(theEvent: NSEvent) {
         /* Called when a mouse click occurs */
         
@@ -57,10 +64,20 @@ class GameView: SCNView {
         Keyboard.sharedKeyboard.handleKey(theEvent, isDown: true)
        self.playing = true
     }
+    
+    
+    override func mouseDragged(theEvent: NSEvent) {
+        self.viewDelegate?.didDragMouse(theEvent)
+    }
+   
 
 }
 
+
+
 protocol GameViewDelegate {
-    func didPressKey()
+    
+    func didMoveMouse(event:NSEvent)
+    func didDragMouse(event:NSEvent)
 }
 
