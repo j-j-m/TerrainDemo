@@ -15,9 +15,23 @@ import simd
 // ⛰🗻🏔  tile for terrain generator
 // 🗻⛰🏔
 
+func ==(lhs: TerrainTile, rhs: TerrainTile) -> Bool{
+    return lhs.hashValue == rhs.hashValue
+}
+
 class TerrainTile: SCNNode {
+   
+    
+    
+    
+    override var hashValue : Int {
+        get {
+            return "\(self.point.x),\(self.point.y)".hashValue
+        }
+    }
     
     var mat:SCNMaterial = SCNMaterial()
+    var point:CGPoint
     /**
      Creates a new planet node with displaced by simplex noise.
      
@@ -32,6 +46,7 @@ class TerrainTile: SCNNode {
      */
     
     init(size:CGSize, position:CGPoint, elevation:CGFloat, seaLevel:CGFloat, segmentCount:Int){
+        point = position
         super.init()
         var terrainGeometry = terrain(size, noiseOffset:position, segmentCount:segmentCount, amplitude:elevation, floor:seaLevel)
       
@@ -39,14 +54,15 @@ class TerrainTile: SCNNode {
         
         
         
+        
         mat.diffuse.contents = checkerboard
-        mat.diffuse.contentsTransform = SCNMatrix4MakeScale(4,4,4);
+        mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20,20,20);
         mat.diffuse.wrapT = SCNWrapMode.Repeat
         mat.diffuse.wrapS = SCNWrapMode.Repeat
         
         mat.shininess = 0.15
         mat.fresnelExponent = 0.25
-        
+        mat.doubleSided = true
         mat.specular.contents = NSColor.whiteColor()
         
         terrainGeometry.materials = [mat]

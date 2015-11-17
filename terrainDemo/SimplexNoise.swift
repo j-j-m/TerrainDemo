@@ -13,6 +13,7 @@ import Foundation
 
 
 func FASTFLOOR(x:Double) -> Int { return x>0 ? Int(x) : Int(x-1) }
+func FASTFLOOR(x:CGFloat) -> CGFloat { return x>0 ? CGFloat(Int(x)) : CGFloat(Int(x-1)) }
 
     var perm = [151,160,137,91,90,15,
     131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
