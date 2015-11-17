@@ -35,7 +35,7 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
         camera.zFar = 1000
         
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3Make(0,50,0)
+        cameraNode.position = SCNVector3Make(0,80,0)
         
         scene.rootNode.addChildNode(cameraNode)
         

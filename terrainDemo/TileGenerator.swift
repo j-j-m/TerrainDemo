@@ -12,10 +12,10 @@ import SceneKit
 class TileGenerator: NSObject {
 
     var delegate:TileGeneratorDelegate?
-    var tileSize:CGSize = CGSizeMake(500, 500)
+    var tileSize:CGSize = CGSizeMake(1000, 1000)
     var tileDictionary:[Int:TerrainTile] = Dictionary()
     var lastReferencePoint:CGPoint = CGPointMake(0, 0)
-    
+    var mutex:Bool = true
     override init(){
         super.init()
     }
@@ -43,19 +43,35 @@ class TileGenerator: NSObject {
     
     func generateTilesForPosition(position:SCNVector3){
         
-        var ref:CGPoint = CGPointMake(FASTFLOOR(position.x/tileSize.width), FASTFLOOR(position.y/tileSize.height))
-        if(lastReferencePoint != ref){
+        if(mutex){
+        self.mutex=false
+        let qualityOfServiceClass = QOS_CLASS_USER_INTERACTIVE
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+        
+        var ref:CGPoint = CGPointMake(FASTFLOOR(position.x/self.tileSize.width), FASTFLOOR(position.y/self.tileSize.height))
+        if(self.lastReferencePoint != ref){
             var count:Int = 0
-            for i in Int(ref.x-1)...Int(ref.x+1){
-                for j in Int(ref.y-1)...Int(ref.y+1){
+            for i in Int(ref.x-2)...Int(ref.x+2){
+                for j in Int(ref.y-2)...Int(ref.y+2){
                    
                     
-                    if(tileDictionary["\(CGFloat(i)*tileSize.width),\(CGFloat(j)*tileSize.width)".hashValue] == nil){
+                    if(self.tileDictionary["\(CGFloat(i)*self.tileSize.width),\(CGFloat(j)*self.tileSize.width)".hashValue] == nil){
                         count++
-                        let tile = TerrainTile(size: tileSize,position:CGPointMake(CGFloat(-i)*tileSize.width, CGFloat(-j)*tileSize.width), elevation: 5, seaLevel: 0, segmentCount: 100)
                         
-                         tileDictionary[tile.hashValue] = tile
-                        self.delegate!.placeTile(tile)
+                        
+                           let tile = TerrainTile(size: self.tileSize,position:CGPointMake(CGFloat(-i)*self.tileSize.width, CGFloat(-j)*self.tileSize.width), elevation: 5, seaLevel: 0, segmentCount: 100)
+                            self.tileDictionary[tile.hashValue] = tile
+                            self.delegate!.placeTile(tile)
+//                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                                self.tileDictionary[tile.hashValue] = tile
+//                                self.delegate!.placeTile(tile)
+//                            })
+                        
+                        
+                        
+                        
+                        
                     }
                     
                     
@@ -66,13 +82,14 @@ class TileGenerator: NSObject {
                 }
             }
             print("ref: \(ref), generating \(count) new tiles.")
-            lastReferencePoint = ref
+            self.lastReferencePoint = ref
             
         }
         
-        
-        
-
+        self.mutex = true
+    })
+    
+        }
     }
 
 
