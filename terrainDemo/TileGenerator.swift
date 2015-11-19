@@ -12,8 +12,8 @@ import SceneKit
 class TileGenerator: NSObject {
 
     var delegate:TileGeneratorDelegate?
-    var tileSize:CGSize = CGSizeMake(1000, 1000)
-    var tileDictionary:[Int:TerrainTile] = Dictionary()
+    var tileSize:CGSize = CGSizeMake(4000, 4000)
+    var tileDictionary:[String:TerrainTile] = Dictionary()
     var lastReferencePoint:CGPoint = CGPointMake(0, 0)
     var mutex:Bool = true
     override init(){
@@ -23,67 +23,63 @@ class TileGenerator: NSObject {
     init(position:CGPoint, delegate:TileGeneratorDelegate){
         self.delegate = delegate
         super.init()
+
         
-        for i in -3...3{
-            for j in -3...3{
-            var tile = TerrainTile(size: tileSize,position:CGPointMake(CGFloat(i)*tileSize.width, CGFloat(j)*tileSize.width), elevation: 5, seaLevel: 0, segmentCount: 100)
-                
-            tileDictionary[tile.hashValue] = tile
-            self.delegate!.placeTile(tile)
-                
-//                if(i==0 && j==0){
-//                    self.delegate!.removeTile(tile)
-//                }
-                
-            }
-        }
-        
-        print(tileDictionary)
+     
     }
     
     func generateTilesForPosition(position:SCNVector3){
-        
+       
         if(mutex){
         self.mutex=false
         let qualityOfServiceClass = QOS_CLASS_USER_INTERACTIVE
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         dispatch_async(backgroundQueue, {
         
-        var ref:CGPoint = CGPointMake(FASTFLOOR(position.x/self.tileSize.width), FASTFLOOR(position.y/self.tileSize.height))
+        let ref:CGPoint = CGPointMake(FASTFLOOR(position.x/self.tileSize.width), FASTFLOOR(-position.z/self.tileSize.height))
+      //  print("\(position) \(ref)")
+            
         if(self.lastReferencePoint != ref){
+            print(position)
             var count:Int = 0
-            for i in Int(ref.x-2)...Int(ref.x+2){
-                for j in Int(ref.y-2)...Int(ref.y+2){
-                   
+            var newKeys:[String] = [String]()
+            var oldKeys:[String] = [String]()
+            for i in Int(ref.x-5)...Int(ref.x+5){
+                for j in Int(ref.y-5)...Int(ref.y+5){
+                   let refPoint = "\(i),\(j)"
+                    let point = CGPointMake(CGFloat(-i)*self.tileSize.width, CGFloat(-j)*self.tileSize.width)
                     
-                    if(self.tileDictionary["\(CGFloat(i)*self.tileSize.width),\(CGFloat(j)*self.tileSize.width)".hashValue] == nil){
-                        count++
+                    if(self.tileDictionary[refPoint] == nil){
+                      count++
                         
+                        newKeys.append(refPoint)
                         
-                           let tile = TerrainTile(size: self.tileSize,position:CGPointMake(CGFloat(-i)*self.tileSize.width, CGFloat(-j)*self.tileSize.width), elevation: 5, seaLevel: 0, segmentCount: 100)
-                            self.tileDictionary[tile.hashValue] = tile
+                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 30)
+                            self.tileDictionary[refPoint] = tile
                             self.delegate!.placeTile(tile)
-//                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                                self.tileDictionary[tile.hashValue] = tile
-//                                self.delegate!.placeTile(tile)
-//                            })
-                        
-                        
-                        
-                        
-                        
                     }
-                    
-                    
-                    //                if(i==0 && j==0){
-                    //                    self.delegate!.removeTile(tile)
-                    //                }
-                    
+                    else{
+                       oldKeys.append(refPoint)
+                    }
+                   
                 }
             }
-            print("ref: \(ref), generating \(count) new tiles.")
-            self.lastReferencePoint = ref
             
+            var keys = Array(self.tileDictionary.keys)
+           
+            keys.removeObjectsInArray(newKeys+oldKeys)
+            
+            for k in keys{
+               let badTile = self.tileDictionary[k]
+                self.tileDictionary.removeValueForKey(k)
+                self.delegate!.removeTile(badTile!)
+            }
+        
+           
+           // print("ref: \(ref), generating \(count) new tiles. resulting in \(self.tileDictionary.count) tiles")
+            
+          // print("newKeys: \(newKeys), oldKeys: \(oldKeys), count: \(count)")
+            self.lastReferencePoint = ref
         }
         
         self.mutex = true

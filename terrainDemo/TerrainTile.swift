@@ -50,12 +50,12 @@ class TerrainTile: SCNNode {
         super.init()
         var terrainGeometry = terrain(size, noiseOffset:position, segmentCount:segmentCount, amplitude:elevation, floor:seaLevel)
       
-        let checkerboard:NSImage = NSImage(named:"checkerboard.png")!
+       // let checkerboard:NSImage = NSImage(named:"checkerboard.png")!
         
         
         
         
-        mat.diffuse.contents = checkerboard
+        //mat.diffuse.contents = checkerboard
         mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20,20,20);
         mat.diffuse.wrapT = SCNWrapMode.Repeat
         mat.diffuse.wrapS = SCNWrapMode.Repeat
