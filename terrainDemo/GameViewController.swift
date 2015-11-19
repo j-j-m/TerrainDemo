@@ -14,11 +14,13 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
     
     let sky = MDLSkyCubeTexture(name: nil,
         channelEncoding: MDLTextureChannelEncoding.UInt8,
-        textureDimensions: [Int32(720), Int32(720)],
+        textureDimensions: [Int32(1080), Int32(1080)],
         turbidity: 0.5,
-        sunElevation: 0.0,
-        upperAtmosphereScattering: 0.1,
-        groundAlbedo: 0.0)
+        sunElevation: 0.5,
+        upperAtmosphereScattering: 0.6,
+        groundAlbedo: 0.5)
+    
+    
     
     let scene:SCNScene = SCNScene()
     let cameraNode:SCNNode = SCNNode()
@@ -31,27 +33,40 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
         
         // create a new scene
        
+        
+        
+        
         let camera:SCNCamera = SCNCamera()
         camera.zNear = 0.1
         camera.zFar = 40000
-        
+        sky.groundColor = CGColorCreateGenericRGB(0.0,0.4,0.8,1.0)
         
         
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3Make(1500,500,1500)
+        cameraNode.position = SCNVector3Make(1500,600,1500)
         tileGenerator = TileGenerator(position: CGPointMake(cameraNode.position.x,cameraNode.position.z), delegate: self)
         //cameraNode.rotation = SCNVector4Make(1, 0, 0, CGFloat(-M_PI_2))
       
         scene.rootNode.addChildNode(cameraNode)
         
+        scene.fogEndDistance = 11000
+        scene.fogEndDistance = 15000
+        scene.fogDensityExponent = 3.0
+        
+
+        scene.fogColor = NSColor(CGColor: sky.groundColor!)!
+        
+        
         let floor = SCNFloor()
         floor.reflectivity = 0.0
+       // floor.reflectionFalloffStart = 0.0
         floor.firstMaterial?.diffuse.contents = NSColor(red: 0.0, green: 0.0, blue: 0.3, alpha: 0.8)
         floor.firstMaterial?.reflective.contents = self.sky.imageFromTexture()?.takeUnretainedValue()
         scene.rootNode.addChildNode(SCNNode(geometry:floor))
         
         
         let seaFloor = SCNFloor()
+        seaFloor.reflectivity = 0.0
         let seaFloorNode = SCNNode(geometry:seaFloor)
         seaFloorNode.position = SCNVector3Make(0,-500,0)
         scene.rootNode.addChildNode(seaFloorNode)
@@ -61,7 +76,7 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = SCNLightTypeOmni
-        lightNode.position = SCNVector3(x: 0, y: 70, z: -180)
+        lightNode.position = SCNVector3(x: 0, y: 3000, z: -180)
         cameraNode.addChildNode(lightNode)
         
         scene.background.contents = self.sky.imageFromTexture()?.takeUnretainedValue()

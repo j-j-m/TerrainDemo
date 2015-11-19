@@ -12,9 +12,10 @@ import SceneKit
 class TileGenerator: NSObject {
 
     var delegate:TileGeneratorDelegate?
-    var tileSize:CGSize = CGSizeMake(4000, 4000)
+    var tileSize:CGSize = CGSizeMake(3000, 3000)
     var tileDictionary:[String:TerrainTile] = Dictionary()
     var lastReferencePoint:CGPoint = CGPointMake(0, 0)
+    var gridSize:CGFloat = 7
     var mutex:Bool = true
     override init(){
         super.init()
@@ -40,12 +41,13 @@ class TileGenerator: NSObject {
       //  print("\(position) \(ref)")
             
         if(self.lastReferencePoint != ref){
+          //
             print(position)
             var count:Int = 0
             var newKeys:[String] = [String]()
             var oldKeys:[String] = [String]()
-            for i in Int(ref.x-5)...Int(ref.x+5){
-                for j in Int(ref.y-5)...Int(ref.y+5){
+            for i in Int(ref.x-self.gridSize)...Int(ref.x+self.gridSize){
+                for j in Int(ref.y-self.gridSize)...Int(ref.y+self.gridSize){
                    let refPoint = "\(i),\(j)"
                     let point = CGPointMake(CGFloat(-i)*self.tileSize.width, CGFloat(-j)*self.tileSize.width)
                     
@@ -54,7 +56,7 @@ class TileGenerator: NSObject {
                         
                         newKeys.append(refPoint)
                         
-                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 30)
+                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 100)
                             self.tileDictionary[refPoint] = tile
                             self.delegate!.placeTile(tile)
                     }

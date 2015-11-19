@@ -55,6 +55,27 @@ class TerrainTile: SCNNode {
         
         
         
+        
+        let bundle = NSBundle.mainBundle()
+        let surfacePath = bundle.pathForResource("heightmap", ofType: "shader")
+        
+    //    let lightingPath = bundle.pathForResource("toon", ofType: "shader")        // toon shader for ships
+        
+        
+        //reading
+        do {
+            let text = try NSString(contentsOfFile: surfacePath!, encoding: NSUTF8StringEncoding)
+            //  let text2 = try NSString(contentsOfFile: lightingPath!, encoding: NSUTF8StringEncoding)
+            mat.shaderModifiers = [SCNShaderModifierEntryPointSurface : text as String]
+            
+            
+        }
+        catch {
+            
+            
+        }
+
+        
         //mat.diffuse.contents = checkerboard
         mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20,20,20);
         mat.diffuse.wrapT = SCNWrapMode.Repeat
