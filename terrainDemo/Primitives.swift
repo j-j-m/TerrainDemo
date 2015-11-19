@@ -186,17 +186,17 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
         normal_src.data.getBytes(&normalArray, range: byteRange)
         
         // At this point you can read the data from the float array
-         let octaves = 20
+         let octaves = 10
         
         //  var factor:Double = Double(norm3D(array[0], y:array[1] , z: array[2]))
-        var factor = 1.0
+        var factor = 10.0
         //   print(simplexNoise3D(Double(array[0])/factor, y: Double(array[1])/factor, z: Double(array[2])/factor))
         
         var disp:Double = 0.0
         //disp = simplexNoise3D(Double(array[0])/factor, y: Double(array[1])/factor, z: Double(array[2])/factor)
         for o in 1...octaves{
             disp += simplexNoise2D(Double(array[0]+Float(noiseOffset.x))/factor,
-                y: Double(array[1]+Float(noiseOffset.y))/factor)*Double(o*o)
+                y: Double(array[1]+Float(noiseOffset.y))/factor)*pow(Double(o),Double(3))
             factor *= 7
         }
         

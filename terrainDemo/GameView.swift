@@ -56,14 +56,17 @@ class GameView: SCNView {
     
     override func keyUp(theEvent: NSEvent) {
         Keyboard.sharedKeyboard.handleKey(theEvent, isDown: false)
-        
+        Keyboard.sharedKeyboard.update()
         
     }
     
     override func keyDown(theEvent: NSEvent) {
         Keyboard.sharedKeyboard.handleKey(theEvent, isDown: true)
+        
        self.playing = true
     }
+    
+    
     
     
     override func mouseDragged(theEvent: NSEvent) {

@@ -14,55 +14,58 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
     
     let sky = MDLSkyCubeTexture(name: nil,
         channelEncoding: MDLTextureChannelEncoding.UInt8,
-        textureDimensions: [Int32(200), Int32(200)],
+        textureDimensions: [Int32(720), Int32(720)],
         turbidity: 0.5,
-        sunElevation: 0.4,
-        upperAtmosphereScattering: 0.7,
-        groundAlbedo: 0.3)
+        sunElevation: 0.0,
+        upperAtmosphereScattering: 0.1,
+        groundAlbedo: 0.0)
     
     let scene:SCNScene = SCNScene()
     let cameraNode:SCNNode = SCNNode()
     var tileGenerator:TileGenerator = TileGenerator() //this is dumb TODO: make this class nullable
+    var isMoving = 0
     
     @IBOutlet weak var gameView: GameView!
     
     override func awakeFromNib(){
-        tileGenerator = TileGenerator(position: CGPointMake(0,0), delegate: self)
+        
         // create a new scene
        
         let camera:SCNCamera = SCNCamera()
         camera.zNear = 0.1
-        camera.zFar = 1000
+        camera.zFar = 40000
+        
+        
         
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3Make(0,80,0)
-        
+        cameraNode.position = SCNVector3Make(1500,500,1500)
+        tileGenerator = TileGenerator(position: CGPointMake(cameraNode.position.x,cameraNode.position.z), delegate: self)
+        //cameraNode.rotation = SCNVector4Make(1, 0, 0, CGFloat(-M_PI_2))
+      
         scene.rootNode.addChildNode(cameraNode)
         
         let floor = SCNFloor()
         floor.reflectivity = 0.0
-        floor.reflectionFalloffStart = 10.0
         floor.firstMaterial?.diffuse.contents = NSColor(red: 0.0, green: 0.0, blue: 0.3, alpha: 0.8)
+        floor.firstMaterial?.reflective.contents = self.sky.imageFromTexture()?.takeUnretainedValue()
         scene.rootNode.addChildNode(SCNNode(geometry:floor))
         
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(0, 0), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(500, 0), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(0, 500), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(500, 500), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(-500, 0), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(0, -500), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(-500, -500), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(500, -500), elevation: 5, seaLevel: 0, segmentCount: 100))
-//        scene.rootNode.addChildNode(TerrainTile(size: CGSizeMake(500,500),position:CGPointMake(-500, 500), elevation: 5, seaLevel: 0, segmentCount: 100))
+        
+        let seaFloor = SCNFloor()
+        let seaFloorNode = SCNNode(geometry:seaFloor)
+        seaFloorNode.position = SCNVector3Make(0,-500,0)
+        scene.rootNode.addChildNode(seaFloorNode)
+        
         
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = SCNLightTypeOmni
-        lightNode.position = SCNVector3(x: 0, y: 40, z: 0)
+        lightNode.position = SCNVector3(x: 0, y: 70, z: -180)
         cameraNode.addChildNode(lightNode)
         
         scene.background.contents = self.sky.imageFromTexture()?.takeUnretainedValue()
+        
         // set the scene to the view
         self.gameView!.scene = scene
         
@@ -85,9 +88,22 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
     
     func renderer(renderer: SCNSceneRenderer, updateAtTime time: NSTimeInterval) {
         
-        if(Keyboard.sharedKeyboard.justPressed(Key.Down)){ cameraNode.position.x -= 10 }
-        if(Keyboard.sharedKeyboard.justPressed(Key.Up)){ cameraNode.position.x += 10 }
+        let b = Basis(node: cameraNode).zAxis
         
+        if(Keyboard.sharedKeyboard.justPressed(Key.Down)){ isMoving = -1 }
+        else if(Keyboard.sharedKeyboard.justPressed(Key.Up)){ isMoving = 1 }
+        if(Keyboard.sharedKeyboard.justReleased(Key.Up) || Keyboard.sharedKeyboard.justReleased(Key.Down)){ isMoving = 0; print("released")  }
+        
+        
+        
+        
+        
+        if(isMoving != 0){
+            cameraNode.position.x -= b.x*50*CGFloat(isMoving)
+            cameraNode.position.z -= b.z*50*CGFloat(isMoving)
+        }
+        
+       
         tileGenerator.generateTilesForPosition(cameraNode.position)
     }
     
@@ -95,7 +111,7 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
     
     
     func didMoveMouse(event:NSEvent) {
-        print(event)
+       // print(event)
     }
     
     func didDragMouse(event:NSEvent) {
@@ -112,9 +128,10 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
     let zAngle = SCNMatrix4MakeRotation(degToRad(0), 0, 0, 1)
     
     let rotationMatrix = SCNMatrix4Mult(SCNMatrix4Mult(xAngle, yAngle), zAngle)
-    print(amount)
+  //  print(amount)
     cameraNode.transform = SCNMatrix4Mult(rotationMatrix, cameraNode.transform)
-
+   // print(cameraNode.rotation)
+    
     }
 
     func degToRad(deg: Float) -> CGFloat {
