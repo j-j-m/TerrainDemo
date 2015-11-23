@@ -197,7 +197,7 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
         for o in 1...octaves{
             disp += simplexNoise2D(Double(array[0]+Float(noiseOffset.x))/factor,
                 y: Double(array[1]+Float(noiseOffset.y))/factor)*pow(Double(o),Double(3))
-            factor *= 7
+            factor *= 6
         }
         
         

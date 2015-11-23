@@ -16,9 +16,9 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
         channelEncoding: MDLTextureChannelEncoding.UInt8,
         textureDimensions: [Int32(1080), Int32(1080)],
         turbidity: 0.5,
-        sunElevation: 0.5,
-        upperAtmosphereScattering: 0.6,
-        groundAlbedo: 0.5)
+        sunElevation: 0.6,
+        upperAtmosphereScattering: 0.5,
+        groundAlbedo: 0.4)
     
     
     
@@ -39,10 +39,11 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
         let camera:SCNCamera = SCNCamera()
         camera.zNear = 0.1
         camera.zFar = 40000
-        sky.groundColor = CGColorCreateGenericRGB(0.0,0.4,0.8,1.0)
+        sky.groundColor = CGColorCreateGenericRGB(0.3,0.1,0.8,1.0)
         
         
         cameraNode.camera = camera
+      //  cameraNode.addParticleSystem(SCNParticleSystem(named: "rain", inDirectory: nil)!)
         cameraNode.position = SCNVector3Make(1500,600,1500)
         tileGenerator = TileGenerator(position: CGPointMake(cameraNode.position.x,cameraNode.position.z), delegate: self)
         //cameraNode.rotation = SCNVector4Make(1, 0, 0, CGFloat(-M_PI_2))

@@ -83,7 +83,7 @@ class TerrainTile: SCNNode {
         
         mat.shininess = 0.15
         mat.fresnelExponent = 0.25
-        mat.doubleSided = true
+        mat.doubleSided = false
         mat.specular.contents = NSColor.whiteColor()
         
         terrainGeometry.materials = [mat]
