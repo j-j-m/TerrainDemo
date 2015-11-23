@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A047351A1BFE5F11008C65F0 /* rain.scnp in Resources */ = {isa = PBXBuildFile; fileRef = A04735181BFE5F11008C65F0 /* rain.scnp */; };
+		A047351B1BFE5F11008C65F0 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A04735191BFE5F11008C65F0 /* spark.png */; };
 		A0A4B6E91BFA4DED00441855 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6E81BFA4DED00441855 /* AppDelegate.swift */; };
 		A0A4B6EB1BFA4DED00441855 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6EA1BFA4DED00441855 /* GameView.swift */; };
 		A0A4B6ED1BFA4DED00441855 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6EC1BFA4DED00441855 /* GameViewController.swift */; };
@@ -15,6 +17,24 @@
 		A0A4B6F41BFA4DEE00441855 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A4B6F21BFA4DEE00441855 /* MainMenu.xib */; };
 		A0A4B6FF1BFA4DEE00441855 /* terrainDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6FE1BFA4DEE00441855 /* terrainDemoTests.swift */; };
 		A0A4B70A1BFA4DEE00441855 /* terrainDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7091BFA4DEE00441855 /* terrainDemoUITests.swift */; };
+		A0A4B7181BFA4FFA00441855 /* TileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7171BFA4FFA00441855 /* TileGenerator.swift */; };
+		A0A4B71A1BFA502D00441855 /* SimplexNoise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7191BFA502D00441855 /* SimplexNoise.swift */; };
+		A0A4B71C1BFA510200441855 /* TerrainTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B71B1BFA510200441855 /* TerrainTile.swift */; };
+		A0A4B71E1BFA546100441855 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B71D1BFA546100441855 /* Primitives.swift */; };
+		A0A4B7221BFA5B2C00441855 /* checkerboard.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A4B7211BFA5B2C00441855 /* checkerboard.png */; };
+		A0A4B7251BFA874600441855 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7241BFA874600441855 /* Keyboard.swift */; };
+		A0DFBFD11BFD396700E79B6B /* Basis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFC91BFD396700E79B6B /* Basis.swift */; };
+		A0DFBFD21BFD396700E79B6B /* LinearAlgebra.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFCA1BFD396700E79B6B /* LinearAlgebra.swift */; };
+		A0DFBFD31BFD396700E79B6B /* Matrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFCB1BFD396700E79B6B /* Matrix4.swift */; };
+		A0DFBFD41BFD396700E79B6B /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFCC1BFD396700E79B6B /* Nodes.swift */; };
+		A0DFBFD51BFD396700E79B6B /* Rotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFCD1BFD396700E79B6B /* Rotations.swift */; };
+		A0DFBFD61BFD396700E79B6B /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFCE1BFD396700E79B6B /* TypeAliases.swift */; };
+		A0DFBFD71BFD396700E79B6B /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFCF1BFD396700E79B6B /* Vector3.swift */; };
+		A0DFBFD81BFD396700E79B6B /* Vector4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFD01BFD396700E79B6B /* Vector4.swift */; };
+		A0DFBFDB1BFD632C00E79B6B /* ext_Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFDA1BFD632C00E79B6B /* ext_Array.swift */; };
+		A0DFBFDD1BFD665100E79B6B /* ext_Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBFDC1BFD665100E79B6B /* ext_Dictionary.swift */; };
+		A0DFBFE11BFD96C700E79B6B /* heightmap.shader in Resources */ = {isa = PBXBuildFile; fileRef = A0DFBFDF1BFD96C700E79B6B /* heightmap.shader */; };
+		A0DFBFE21BFD96C700E79B6B /* toon.shader in Resources */ = {isa = PBXBuildFile; fileRef = A0DFBFE01BFD96C700E79B6B /* toon.shader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A0A4B6E51BFA4DED00441855 /* terrainDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = terrainDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04735181BFE5F11008C65F0 /* rain.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = rain.scnp; sourceTree = "<group>"; };
+		A04735191BFE5F11008C65F0 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		A0A4B6E51BFA4DED00441855 /* TerrainDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerrainDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A4B6E81BFA4DED00441855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A4B6EA1BFA4DED00441855 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A0A4B6EC1BFA4DED00441855 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -43,12 +65,30 @@
 		A0A4B6F01BFA4DED00441855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0A4B6F31BFA4DEE00441855 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A0A4B6F51BFA4DEE00441855 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0A4B6FA1BFA4DEE00441855 /* terrainDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = terrainDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A4B6FA1BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerrainDemo.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A4B6FE1BFA4DEE00441855 /* terrainDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = terrainDemoTests.swift; sourceTree = "<group>"; };
 		A0A4B7001BFA4DEE00441855 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0A4B7051BFA4DEE00441855 /* terrainDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = terrainDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A4B7051BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerrainDemo.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A4B7091BFA4DEE00441855 /* terrainDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = terrainDemoUITests.swift; sourceTree = "<group>"; };
 		A0A4B70B1BFA4DEE00441855 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0A4B7171BFA4FFA00441855 /* TileGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileGenerator.swift; sourceTree = "<group>"; };
+		A0A4B7191BFA502D00441855 /* SimplexNoise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplexNoise.swift; sourceTree = "<group>"; };
+		A0A4B71B1BFA510200441855 /* TerrainTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainTile.swift; sourceTree = "<group>"; };
+		A0A4B71D1BFA546100441855 /* Primitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primitives.swift; sourceTree = "<group>"; };
+		A0A4B7211BFA5B2C00441855 /* checkerboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerboard.png; sourceTree = "<group>"; };
+		A0A4B7241BFA874600441855 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		A0DFBFC91BFD396700E79B6B /* Basis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Basis.swift; sourceTree = "<group>"; };
+		A0DFBFCA1BFD396700E79B6B /* LinearAlgebra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearAlgebra.swift; sourceTree = "<group>"; };
+		A0DFBFCB1BFD396700E79B6B /* Matrix4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix4.swift; sourceTree = "<group>"; };
+		A0DFBFCC1BFD396700E79B6B /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
+		A0DFBFCD1BFD396700E79B6B /* Rotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotations.swift; sourceTree = "<group>"; };
+		A0DFBFCE1BFD396700E79B6B /* TypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		A0DFBFCF1BFD396700E79B6B /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		A0DFBFD01BFD396700E79B6B /* Vector4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector4.swift; sourceTree = "<group>"; };
+		A0DFBFDA1BFD632C00E79B6B /* ext_Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ext_Array.swift; sourceTree = "<group>"; };
+		A0DFBFDC1BFD665100E79B6B /* ext_Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ext_Dictionary.swift; sourceTree = "<group>"; };
+		A0DFBFDF1BFD96C700E79B6B /* heightmap.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heightmap.shader; sourceTree = "<group>"; };
+		A0DFBFE01BFD96C700E79B6B /* toon.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toon.shader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +116,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A047351C1BFE5F2E008C65F0 /* Particle Effectors */ = {
+			isa = PBXGroup;
+			children = (
+				A04735181BFE5F11008C65F0 /* rain.scnp */,
+				A04735191BFE5F11008C65F0 /* spark.png */,
+			);
+			name = "Particle Effectors";
+			sourceTree = "<group>";
+		};
 		A0A4B6DC1BFA4DED00441855 = {
 			isa = PBXGroup;
 			children = (
@@ -89,9 +138,9 @@
 		A0A4B6E61BFA4DED00441855 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A0A4B6E51BFA4DED00441855 /* terrainDemo.app */,
-				A0A4B6FA1BFA4DEE00441855 /* terrainDemoTests.xctest */,
-				A0A4B7051BFA4DEE00441855 /* terrainDemoUITests.xctest */,
+				A0A4B6E51BFA4DED00441855 /* TerrainDemo.temp_caseinsensitive_rename.app */,
+				A0A4B6FA1BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */,
+				A0A4B7051BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +151,16 @@
 				A0A4B6E81BFA4DED00441855 /* AppDelegate.swift */,
 				A0A4B6EA1BFA4DED00441855 /* GameView.swift */,
 				A0A4B6EC1BFA4DED00441855 /* GameViewController.swift */,
+				A0A4B7171BFA4FFA00441855 /* TileGenerator.swift */,
+				A0A4B71B1BFA510200441855 /* TerrainTile.swift */,
+				A0A4B7191BFA502D00441855 /* SimplexNoise.swift */,
+				A0DFBFD91BFD630500E79B6B /* Utility */,
+				A0DFBFC81BFD393900E79B6B /* SCNLinearAlgebra */,
+				A0A4B71D1BFA546100441855 /* Primitives.swift */,
+				A0DFBFDE1BFD96B400E79B6B /* Shaders */,
+				A0A4B7231BFA872700441855 /* Input */,
+				A0A4B7211BFA5B2C00441855 /* checkerboard.png */,
+				A047351C1BFE5F2E008C65F0 /* Particle Effectors */,
 				A0A4B6EE1BFA4DED00441855 /* art.scnassets */,
 				A0A4B6F01BFA4DED00441855 /* Assets.xcassets */,
 				A0A4B6F21BFA4DEE00441855 /* MainMenu.xib */,
@@ -128,6 +187,47 @@
 			path = terrainDemoUITests;
 			sourceTree = "<group>";
 		};
+		A0A4B7231BFA872700441855 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				A0A4B7241BFA874600441855 /* Keyboard.swift */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
+		A0DFBFC81BFD393900E79B6B /* SCNLinearAlgebra */ = {
+			isa = PBXGroup;
+			children = (
+				A0DFBFC91BFD396700E79B6B /* Basis.swift */,
+				A0DFBFCA1BFD396700E79B6B /* LinearAlgebra.swift */,
+				A0DFBFCB1BFD396700E79B6B /* Matrix4.swift */,
+				A0DFBFCC1BFD396700E79B6B /* Nodes.swift */,
+				A0DFBFCD1BFD396700E79B6B /* Rotations.swift */,
+				A0DFBFCE1BFD396700E79B6B /* TypeAliases.swift */,
+				A0DFBFCF1BFD396700E79B6B /* Vector3.swift */,
+				A0DFBFD01BFD396700E79B6B /* Vector4.swift */,
+			);
+			name = SCNLinearAlgebra;
+			sourceTree = "<group>";
+		};
+		A0DFBFD91BFD630500E79B6B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A0DFBFDA1BFD632C00E79B6B /* ext_Array.swift */,
+				A0DFBFDC1BFD665100E79B6B /* ext_Dictionary.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		A0DFBFDE1BFD96B400E79B6B /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				A0DFBFDF1BFD96C700E79B6B /* heightmap.shader */,
+				A0DFBFE01BFD96C700E79B6B /* toon.shader */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,7 +245,7 @@
 			);
 			name = terrainDemo;
 			productName = terrainDemo;
-			productReference = A0A4B6E51BFA4DED00441855 /* terrainDemo.app */;
+			productReference = A0A4B6E51BFA4DED00441855 /* TerrainDemo.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A0A4B6F91BFA4DEE00441855 /* terrainDemoTests */ = {
@@ -163,7 +263,7 @@
 			);
 			name = terrainDemoTests;
 			productName = terrainDemoTests;
-			productReference = A0A4B6FA1BFA4DEE00441855 /* terrainDemoTests.xctest */;
+			productReference = A0A4B6FA1BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A0A4B7041BFA4DEE00441855 /* terrainDemoUITests */ = {
@@ -181,7 +281,7 @@
 			);
 			name = terrainDemoUITests;
 			productName = terrainDemoUITests;
-			productReference = A0A4B7051BFA4DEE00441855 /* terrainDemoUITests.xctest */;
+			productReference = A0A4B7051BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "terrainDemo" */;
+			buildConfigurationList = A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "TerrainDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -232,7 +332,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0A4B7221BFA5B2C00441855 /* checkerboard.png in Resources */,
+				A047351A1BFE5F11008C65F0 /* rain.scnp in Resources */,
 				A0A4B6F11BFA4DED00441855 /* Assets.xcassets in Resources */,
+				A0DFBFE21BFD96C700E79B6B /* toon.shader in Resources */,
+				A0DFBFE11BFD96C700E79B6B /* heightmap.shader in Resources */,
+				A047351B1BFE5F11008C65F0 /* spark.png in Resources */,
 				A0A4B6EF1BFA4DED00441855 /* art.scnassets in Resources */,
 				A0A4B6F41BFA4DEE00441855 /* MainMenu.xib in Resources */,
 			);
@@ -261,7 +366,22 @@
 			files = (
 				A0A4B6EB1BFA4DED00441855 /* GameView.swift in Sources */,
 				A0A4B6ED1BFA4DED00441855 /* GameViewController.swift in Sources */,
+				A0DFBFD31BFD396700E79B6B /* Matrix4.swift in Sources */,
+				A0DFBFD11BFD396700E79B6B /* Basis.swift in Sources */,
+				A0A4B7251BFA874600441855 /* Keyboard.swift in Sources */,
+				A0A4B71A1BFA502D00441855 /* SimplexNoise.swift in Sources */,
+				A0DFBFDB1BFD632C00E79B6B /* ext_Array.swift in Sources */,
 				A0A4B6E91BFA4DED00441855 /* AppDelegate.swift in Sources */,
+				A0DFBFD41BFD396700E79B6B /* Nodes.swift in Sources */,
+				A0A4B7181BFA4FFA00441855 /* TileGenerator.swift in Sources */,
+				A0A4B71C1BFA510200441855 /* TerrainTile.swift in Sources */,
+				A0DFBFD51BFD396700E79B6B /* Rotations.swift in Sources */,
+				A0A4B71E1BFA546100441855 /* Primitives.swift in Sources */,
+				A0DFBFD61BFD396700E79B6B /* TypeAliases.swift in Sources */,
+				A0DFBFD71BFD396700E79B6B /* Vector3.swift in Sources */,
+				A0DFBFDD1BFD665100E79B6B /* ext_Dictionary.swift in Sources */,
+				A0DFBFD21BFD396700E79B6B /* LinearAlgebra.swift in Sources */,
+				A0DFBFD81BFD396700E79B6B /* Vector4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +516,7 @@
 				INFOPLIST_FILE = terrainDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
 			};
 			name = Debug;
 		};
@@ -408,7 +528,7 @@
 				INFOPLIST_FILE = terrainDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
 			};
 			name = Release;
 		};
@@ -421,8 +541,8 @@
 				INFOPLIST_FILE = terrainDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/terrainDemo.app/Contents/MacOS/terrainDemo";
+				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TerrainDemo.temp_caseinsensitive_rename.app/Contents/MacOS/TerrainDemo.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -434,8 +554,8 @@
 				INFOPLIST_FILE = terrainDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/terrainDemo.app/Contents/MacOS/terrainDemo";
+				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TerrainDemo.temp_caseinsensitive_rename.app/Contents/MacOS/TerrainDemo.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -447,7 +567,7 @@
 				INFOPLIST_FILE = terrainDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
 				TEST_TARGET_NAME = terrainDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -460,7 +580,7 @@
 				INFOPLIST_FILE = terrainDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
 				TEST_TARGET_NAME = terrainDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -469,7 +589,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "terrainDemo" */ = {
+		A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "TerrainDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0A4B70C1BFA4DEE00441855 /* Debug */,
@@ -485,6 +605,7 @@
 				A0A4B7101BFA4DEE00441855 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0A4B7111BFA4DEE00441855 /* Build configuration list for PBXNativeTarget "terrainDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +614,7 @@
 				A0A4B7131BFA4DEE00441855 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0A4B7141BFA4DEE00441855 /* Build configuration list for PBXNativeTarget "terrainDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +623,7 @@
 				A0A4B7161BFA4DEE00441855 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
