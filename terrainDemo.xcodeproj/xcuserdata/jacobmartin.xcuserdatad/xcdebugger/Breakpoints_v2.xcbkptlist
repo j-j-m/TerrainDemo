@@ -10,13 +10,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "terrainDemo/TileGenerator.swift"
-            timestampString = "469616279.876385"
+            timestampString = "512555118.105908"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "generateTilesForPosition(_:)"
-            landmarkType = "5">
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "TileGenerator"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.tileSize.getter : __C.CGSize"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.580393"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.tileSize.setter : __C.CGSize"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.582187"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.init () -&gt; TerrainDemo_temp_caseinsensitive_rename.TileGenerator"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.583531"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "226">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.init (position : __C.CGPoint, delegate : TerrainDemo_temp_caseinsensitive_rename.TileGeneratorDelegate) -&gt; TerrainDemo_temp_caseinsensitive_rename.TileGenerator"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.584825"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +88,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "terrainDemo/TileGenerator.swift"
-            timestampString = "469616279.876385"
+            timestampString = "512555118.105908"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "generateTilesForPosition(_:)"
-            landmarkType = "5">
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "TileGenerator"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.tileSize.getter : __C.CGSize"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.588209"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.tileSize.setter : __C.CGSize"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.58993"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.init () -&gt; TerrainDemo_temp_caseinsensitive_rename.TileGenerator"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.591403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "226">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TerrainDemo_temp_caseinsensitive_rename.TileGenerator.init (position : __C.CGPoint, delegate : TerrainDemo_temp_caseinsensitive_rename.TileGeneratorDelegate) -&gt; TerrainDemo_temp_caseinsensitive_rename.TileGenerator"
+                  moduleName = "TerrainDemo.temp_caseinsensitive_rename"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacobmartin/Development/TerrainDemo/terrainDemo/TileGenerator.swift"
+                  timestampString = "512555124.592699"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

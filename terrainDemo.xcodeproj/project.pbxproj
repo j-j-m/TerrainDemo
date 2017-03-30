@@ -12,10 +12,8 @@
 		A0A4B6E91BFA4DED00441855 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6E81BFA4DED00441855 /* AppDelegate.swift */; };
 		A0A4B6EB1BFA4DED00441855 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6EA1BFA4DED00441855 /* GameView.swift */; };
 		A0A4B6ED1BFA4DED00441855 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6EC1BFA4DED00441855 /* GameViewController.swift */; };
-		A0A4B6EF1BFA4DED00441855 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A4B6EE1BFA4DED00441855 /* art.scnassets */; };
 		A0A4B6F11BFA4DED00441855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A4B6F01BFA4DED00441855 /* Assets.xcassets */; };
 		A0A4B6F41BFA4DEE00441855 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A4B6F21BFA4DEE00441855 /* MainMenu.xib */; };
-		A0A4B6FF1BFA4DEE00441855 /* terrainDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B6FE1BFA4DEE00441855 /* terrainDemoTests.swift */; };
 		A0A4B70A1BFA4DEE00441855 /* terrainDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7091BFA4DEE00441855 /* terrainDemoUITests.swift */; };
 		A0A4B7181BFA4FFA00441855 /* TileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7171BFA4FFA00441855 /* TileGenerator.swift */; };
 		A0A4B71A1BFA502D00441855 /* SimplexNoise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B7191BFA502D00441855 /* SimplexNoise.swift */; };
@@ -61,12 +59,10 @@
 		A0A4B6E81BFA4DED00441855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A4B6EA1BFA4DED00441855 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A0A4B6EC1BFA4DED00441855 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		A0A4B6EE1BFA4DED00441855 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		A0A4B6F01BFA4DED00441855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0A4B6F31BFA4DEE00441855 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A0A4B6F51BFA4DEE00441855 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0A4B6FA1BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerrainDemo.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0A4B6FE1BFA4DEE00441855 /* terrainDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = terrainDemoTests.swift; sourceTree = "<group>"; };
 		A0A4B7001BFA4DEE00441855 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0A4B7051BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerrainDemo.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A4B7091BFA4DEE00441855 /* terrainDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = terrainDemoUITests.swift; sourceTree = "<group>"; };
@@ -161,7 +157,6 @@
 				A0A4B7231BFA872700441855 /* Input */,
 				A0A4B7211BFA5B2C00441855 /* checkerboard.png */,
 				A047351C1BFE5F2E008C65F0 /* Particle Effectors */,
-				A0A4B6EE1BFA4DED00441855 /* art.scnassets */,
 				A0A4B6F01BFA4DED00441855 /* Assets.xcassets */,
 				A0A4B6F21BFA4DEE00441855 /* MainMenu.xib */,
 				A0A4B6F51BFA4DEE00441855 /* Info.plist */,
@@ -172,7 +167,6 @@
 		A0A4B6FD1BFA4DEE00441855 /* terrainDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				A0A4B6FE1BFA4DEE00441855 /* terrainDemoTests.swift */,
 				A0A4B7001BFA4DEE00441855 /* Info.plist */,
 			);
 			path = terrainDemoTests;
@@ -296,18 +290,21 @@
 				TargetAttributes = {
 					A0A4B6E41BFA4DED00441855 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0820;
 					};
 					A0A4B6F91BFA4DEE00441855 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = A0A4B6E41BFA4DED00441855;
 					};
 					A0A4B7041BFA4DEE00441855 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = A0A4B6E41BFA4DED00441855;
 					};
 				};
 			};
-			buildConfigurationList = A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "TerrainDemo" */;
+			buildConfigurationList = A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "terrainDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -338,7 +335,6 @@
 				A0DFBFE21BFD96C700E79B6B /* toon.shader in Resources */,
 				A0DFBFE11BFD96C700E79B6B /* heightmap.shader in Resources */,
 				A047351B1BFE5F11008C65F0 /* spark.png in Resources */,
-				A0A4B6EF1BFA4DED00441855 /* art.scnassets in Resources */,
 				A0A4B6F41BFA4DEE00441855 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,7 +385,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A4B6FF1BFA4DEE00441855 /* terrainDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +512,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemo;
 				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -529,6 +525,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemo;
 				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -542,6 +539,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoTests;
 				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TerrainDemo.temp_caseinsensitive_rename.app/Contents/MacOS/TerrainDemo.temp_caseinsensitive_rename";
 			};
 			name = Debug;
@@ -555,6 +553,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoTests;
 				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TerrainDemo.temp_caseinsensitive_rename.app/Contents/MacOS/TerrainDemo.temp_caseinsensitive_rename";
 			};
 			name = Release;
@@ -568,6 +567,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoUITests;
 				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = terrainDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -581,6 +581,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemoUITests;
 				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = terrainDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -589,7 +590,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "TerrainDemo" */ = {
+		A0A4B6E01BFA4DED00441855 /* Build configuration list for PBXProject "terrainDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0A4B70C1BFA4DEE00441855 /* Debug */,

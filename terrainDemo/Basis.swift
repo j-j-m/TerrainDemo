@@ -9,7 +9,7 @@
 import Foundation
 import SceneKit
 
-public class Basis {
+open class Basis {
     let origin: Position
 
     let xAxis: Direction
@@ -37,7 +37,7 @@ public class Basis {
     }
 
     // class var Workaround:
-    private struct StdBasisStruct {
+    fileprivate struct StdBasisStruct {
         static var standardBasis = Basis(origin: Position(x: 0, y: 0, z: 0), x: Direction(x: 1, y: 0, z: 0), y: Direction(x: 0, y: 1, z: 0), z: Direction(x: 0, y: 0, z: 1))
     }
     class var StandardBasis: Basis {

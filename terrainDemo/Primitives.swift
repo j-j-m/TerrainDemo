@@ -11,9 +11,9 @@ import SceneKit
 import QuartzCore
 
 
-func toSpherical(x:Float, y:Float, z:Float) -> CGPoint{
+func toSpherical(_ x:Float, y:Float, z:Float) -> CGPoint{
     let norm:Float = sqrt(pow(x, 2)+pow(y, 2)+pow(z, 2))
-    var point:CGPoint = CGPointMake(acos(CGFloat(z/norm)), atan(CGFloat(y/x)))
+    var point:CGPoint = CGPoint(x: acos(CGFloat(z/norm)), y: atan(CGFloat(y/x)))
     if (point.y.isNaN){
         point.y = 0
     }
@@ -26,20 +26,20 @@ func toSpherical(x:Float, y:Float, z:Float) -> CGPoint{
 
 
 
-func geoSphere(radius:CGFloat, segmentCount:Int, amplitude:CGFloat, floor:CGFloat, octaves:Int, frequency:CGFloat) -> SCNGeometry{
+func geoSphere(_ radius:CGFloat, segmentCount:Int, amplitude:CGFloat, floor:CGFloat, octaves:Int, frequency:CGFloat) -> SCNGeometry{
     
     let sph:SCNSphere = SCNSphere(radius: radius)
     
     
     SCNTransaction.begin()
-    sph.geodesic = true
+    sph.isGeodesic = true
     sph.segmentCount = segmentCount
     
     SCNTransaction.commit()
     
-    let vertex_src = sph.geometrySourcesForSemantic(SCNGeometrySourceSemanticVertex)[0]    //pull out vertex data
-    let normal_src = sph.geometrySourcesForSemantic(SCNGeometrySourceSemanticNormal)[0]    //and surface normal data
-    let texture_src = sph.geometrySourcesForSemantic(SCNGeometrySourceSemanticTexcoord)[0] //as well as texture coordinate data so we may keep the same texture mapping
+    let vertex_src = sph.getGeometrySources(for: SCNGeometrySource.Semantic.vertex)[0]    //pull out vertex data
+    let normal_src = sph.getGeometrySources(for: SCNGeometrySource.Semantic.normal)[0]    //and surface normal data
+    let texture_src = sph.getGeometrySources(for: SCNGeometrySource.Semantic.texcoord)[0] //as well as texture coordinate data so we may keep the same texture mapping
     
     let stride:NSInteger = vertex_src.dataStride; // in bytes
     let offset:NSInteger = vertex_src.dataOffset; // in bytes
@@ -49,26 +49,26 @@ func geoSphere(radius:CGFloat, segmentCount:Int, amplitude:CGFloat, floor:CGFloa
     let vectorCount:NSInteger = vertex_src.vectorCount;
     
     
-    let count = vertex_src.data.length / sizeof(Float)
+    let count = vertex_src.data.count / MemoryLayout<Float>.size
     
-    var vertArray = [Float](count: count, repeatedValue: 0)
-    vertex_src.data.getBytes(&vertArray, length:count * sizeof(Float))
+    var vertArray = [Float](repeating: 0, count: count)
+    (vertex_src.data as NSData).getBytes(&vertArray, length:count * MemoryLayout<Float>.size)
    
 
 
 
-    for (var i:NSInteger = 0; i<vectorCount; i++) {
+    for i:NSInteger in 0 ..< vectorCount {
         // The range of bytes for this vector
         let byteRange: NSRange = NSMakeRange(i*stride + offset, // Start at current stride + offset
             bytesPerVector);   // and read the lenght of one vector
         
         // create array of appropriate length:
-        var array = [Float](count: 3, repeatedValue: 0)
-        var normalArray = [Float](count: 3, repeatedValue: 0)
+        var array = [Float](repeating: 0, count: 3)
+        var normalArray = [Float](repeating: 0, count: 3)
         // copy bytes into array
         
-        vertex_src.data.getBytes(&array, range: byteRange)
-        normal_src.data.getBytes(&normalArray, range: byteRange)
+        (vertex_src.data as NSData).getBytes(&array, range: byteRange)
+        (normal_src.data as NSData).getBytes(&normalArray, range: byteRange)
         
         // At this point you can read the data from the float array
        // let octaves = 10
@@ -109,15 +109,16 @@ func geoSphere(radius:CGFloat, segmentCount:Int, amplitude:CGFloat, floor:CGFloa
         
     }
 
-    let data:NSData = NSData(bytes: vertArray, length: Int(vectorCount * 3 * sizeof(Float)))
+   
+    let data:Data = Data(bytes: vertArray, count: Int(vectorCount * 3 * MemoryLayout<Float>.size))
     let source:SCNGeometrySource = SCNGeometrySource(data:data,
-        semantic:SCNGeometrySourceSemanticVertex,
+        semantic:SCNGeometrySource.Semantic.vertex,
         vectorCount:vectorCount,
-        floatComponents:true,
+        usesFloatComponents:true,
         componentsPerVector:3,
-        bytesPerComponent:sizeof(Float),
+        bytesPerComponent:MemoryLayout<Float>.size,
         dataOffset:0,
-        dataStride:sizeof(Float)*3)
+        dataStride:MemoryLayout<Float>.size*3)
     
     
     
@@ -125,9 +126,9 @@ func geoSphere(radius:CGFloat, segmentCount:Int, amplitude:CGFloat, floor:CGFloa
     
     
     let geomElement:SCNGeometryElement = SCNGeometryElement(           
-        data: sph.geometryElementAtIndex(0).data,
-        primitiveType: SCNGeometryPrimitiveType.Triangles,
-        primitiveCount: sph.geometryElementAtIndex(0).primitiveCount,
+        data: sph.geometryElement(at: 0).data,
+        primitiveType: SCNGeometryPrimitiveType.triangles,
+        primitiveCount: sph.geometryElement(at: 0).primitiveCount,
         bytesPerIndex: 2)
     
     
@@ -140,7 +141,7 @@ func geoSphere(radius:CGFloat, segmentCount:Int, amplitude:CGFloat, floor:CGFloa
 }
 
 
-func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFloat, floor:CGFloat)->SCNGeometry{
+func terrain(_ size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFloat, floor:CGFloat)->SCNGeometry{
     let pln:SCNPlane = SCNPlane(width: size.width, height: size.height)
     
     
@@ -152,9 +153,9 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
 
     SCNTransaction.commit()
     
-    let vertex_src = pln.geometrySourcesForSemantic(SCNGeometrySourceSemanticVertex)[0]    //pull out vertex data
-    let normal_src = pln.geometrySourcesForSemantic(SCNGeometrySourceSemanticNormal)[0]    //and surface normal data
-    let texture_src = pln.geometrySourcesForSemantic(SCNGeometrySourceSemanticTexcoord)[0] //as well as texture coordinate data so we may keep the same texture mapping
+    let vertex_src = pln.getGeometrySources(for: SCNGeometrySource.Semantic.vertex)[0]    //pull out vertex data
+    let normal_src = pln.getGeometrySources(for: SCNGeometrySource.Semantic.normal)[0]    //and surface normal data
+    let texture_src = pln.getGeometrySources(for: SCNGeometrySource.Semantic.texcoord)[0] //as well as texture coordinate data so we may keep the same texture mapping
     
     let stride:NSInteger = vertex_src.dataStride; // in bytes
     let offset:NSInteger = vertex_src.dataOffset; // in bytes
@@ -164,26 +165,26 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
     let vectorCount:NSInteger = vertex_src.vectorCount;
     
     
-    let count = vertex_src.data.length / sizeof(Float)
+    let count = vertex_src.data.count / MemoryLayout<Float>.size
     
-    var vertArray = [Float](count: count, repeatedValue: 0)
-    vertex_src.data.getBytes(&vertArray, length:count * sizeof(Float))
-    
-    
+    var vertArray = [Float](repeating: 0, count: count)
+    (vertex_src.data as NSData).getBytes(&vertArray, length:count * MemoryLayout<Float>.size)
     
     
-    for (var i:NSInteger = 0; i<vectorCount; i++) {
+    
+    
+    for i:NSInteger in 0 ..< vectorCount {
         // The range of bytes for this vector
         let byteRange: NSRange = NSMakeRange(i*stride + offset, // Start at current stride + offset
             bytesPerVector);   // and read the lenght of one vector
         
         // create array of appropriate length:
-        var array = [Float](count: 3, repeatedValue: 0)
-        var normalArray = [Float](count: 3, repeatedValue: 0)
+        var array = [Float](repeating: 0, count: 3)
+        var normalArray = [Float](repeating: 0, count: 3)
         // copy bytes into array
         
-        vertex_src.data.getBytes(&array, range: byteRange)
-        normal_src.data.getBytes(&normalArray, range: byteRange)
+        (vertex_src.data as NSData).getBytes(&array, range: byteRange)
+        (normal_src.data as NSData).getBytes(&normalArray, range: byteRange)
         
         // At this point you can read the data from the float array
          let octaves = 10
@@ -227,15 +228,18 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
         
     }
     
-    let data:NSData = NSData(bytes: vertArray, length: Int(vectorCount * 3 * sizeof(Float)))
+    
+   
+    let data:Data = Data(bytes: vertArray, count: Int(vectorCount * 3 * MemoryLayout<Float>.size))
+    
     let source:SCNGeometrySource = SCNGeometrySource(data:data,
-        semantic:SCNGeometrySourceSemanticVertex,
+        semantic:SCNGeometrySource.Semantic.vertex,
         vectorCount:vectorCount,
-        floatComponents:true,
+        usesFloatComponents:true,
         componentsPerVector:3,
-        bytesPerComponent:sizeof(Float),
+        bytesPerComponent:MemoryLayout<Float>.size,
         dataOffset:0,
-        dataStride:sizeof(Float)*3)
+        dataStride:MemoryLayout<Float>.size*3)
     
     
     
@@ -243,9 +247,9 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
     
     
     let geomElement:SCNGeometryElement = SCNGeometryElement(
-        data: pln.geometryElementAtIndex(0).data,
-        primitiveType: SCNGeometryPrimitiveType.Triangles,
-        primitiveCount: pln.geometryElementAtIndex(0).primitiveCount,
+        data: pln.geometryElement(at: 0).data,
+        primitiveType: SCNGeometryPrimitiveType.triangles,
+        primitiveCount: pln.geometryElement(at: 0).primitiveCount,
         bytesPerIndex: 2)
     
     
@@ -260,6 +264,15 @@ func terrain(size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGFlo
 
 
 
+func toByteArray<T>(_ value: T) -> [UInt8] {
+    var value = value
+    return withUnsafeBytes(of: &value) { Array($0) }
+}
 
+func fromByteArray<T>(_ value: [UInt8], _: T.Type) -> T {
+    return value.withUnsafeBytes {
+        $0.baseAddress!.load(as: T.self)
+    }
+}
 
 

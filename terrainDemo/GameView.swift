@@ -14,8 +14,8 @@ class GameView: SCNView {
     
     
 
-    override func mouseMoved(theEvent: NSEvent) {
-        super.mouseMoved(theEvent)
+    override func mouseMoved(with theEvent: NSEvent) {
+        super.mouseMoved(with: theEvent)
         self.viewDelegate?.didMoveMouse(theEvent)
     }
 //    override func mouseDown(theEvent: NSEvent) {
@@ -54,22 +54,22 @@ class GameView: SCNView {
 //        super.mouseDown(theEvent)
 //    }
     
-    override func keyUp(theEvent: NSEvent) {
+    override func keyUp(with theEvent: NSEvent) {
         Keyboard.sharedKeyboard.handleKey(theEvent, isDown: false)
         Keyboard.sharedKeyboard.update()
         
     }
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         Keyboard.sharedKeyboard.handleKey(theEvent, isDown: true)
         
-       self.playing = true
+       self.isPlaying = true
     }
     
     
     
     
-    override func mouseDragged(theEvent: NSEvent) {
+    override func mouseDragged(with theEvent: NSEvent) {
         self.viewDelegate?.didDragMouse(theEvent)
     }
    
@@ -80,7 +80,7 @@ class GameView: SCNView {
 
 protocol GameViewDelegate {
     
-    func didMoveMouse(event:NSEvent)
-    func didDragMouse(event:NSEvent)
+    func didMoveMouse(_ event:NSEvent)
+    func didDragMouse(_ event:NSEvent)
 }
 

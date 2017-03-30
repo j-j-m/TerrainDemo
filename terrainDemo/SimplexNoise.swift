@@ -12,8 +12,8 @@
 import Foundation
 
 
-func FASTFLOOR(x:Double) -> Int { return x>0 ? Int(x) : Int(x-1) }
-func FASTFLOOR(x:CGFloat) -> CGFloat { return x>0 ? CGFloat(Int(x)) : CGFloat(Int(x-1)) }
+func FASTFLOOR(_ x:Double) -> Int { return x>0 ? Int(x) : Int(x-1) }
+func FASTFLOOR(_ x:CGFloat) -> CGFloat { return x>0 ? CGFloat(Int(x)) : CGFloat(Int(x-1)) }
 
     var perm = [151,160,137,91,90,15,
     131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
@@ -43,14 +43,14 @@ func FASTFLOOR(x:CGFloat) -> CGFloat { return x>0 ? CGFloat(Int(x)) : CGFloat(In
     138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180]
 
 
-func grad1(hash:Int, x:Double) -> Double{
+func grad1(_ hash:Int, x:Double) -> Double{
    let h = hash & 15
     var grad:Double = 1.0 + Double(h & 7)
     if (h&8 != 0){ grad = -grad }
     return grad*x
 }
 
-func grad2(hash:Int, x:Double, y:Double) -> Double{
+func grad2(_ hash:Int, x:Double, y:Double) -> Double{
     let h = hash & 7
     let u:Double = h<4 ? x : y
     let v:Double = h<4 ? y : x
@@ -58,7 +58,7 @@ func grad2(hash:Int, x:Double, y:Double) -> Double{
     return ((h&1 != 0) ? -u: u) + ((h&2 != 0) ? -2.0*v : 2.0*v)
 }
 
-func grad3(hash:Int, x:Double, y:Double, z:Double) -> Double{
+func grad3(_ hash:Int, x:Double, y:Double, z:Double) -> Double{
     let h = hash & 15
     let u:Double = h<8 ? x : y
     let v:Double = h<4 ? y : h==12 || h==14 ? x : z
@@ -66,7 +66,7 @@ func grad3(hash:Int, x:Double, y:Double, z:Double) -> Double{
     return ((h&1 != 0) ? -u : u) + ((h&2 != 0) ? -v : v)
 }
 
-func grad4(hash:Int, x:Double, y:Double, z:Double, t:Double) -> Double{
+func grad4(_ hash:Int, x:Double, y:Double, z:Double, t:Double) -> Double{
     let h = hash & 7
     let u:Double = h<24 ? x : y
     let v:Double = h<16 ? y : z
@@ -80,7 +80,7 @@ func grad4(hash:Int, x:Double, y:Double, z:Double, t:Double) -> Double{
 
 
 //1 Dimensional Simplex Noise
-func simplexNoise1D(x:Double) -> Double{
+func simplexNoise1D(_ x:Double) -> Double{
     
     let i0 = FASTFLOOR(x)
     let i1 = i0 + 1
@@ -102,7 +102,7 @@ func simplexNoise1D(x:Double) -> Double{
 }
 
 //2 Dimensional Simplex Noise
-func simplexNoise2D(x:Double, y:Double) -> Double{
+func simplexNoise2D(_ x:Double, y:Double) -> Double{
   
     let F2 = 0.366025403 // (sqrt(5.0)-1.0)/4.0
     let G2 = 0.211324865 // (5.0-sqrt(5.0))/20.0
@@ -169,7 +169,7 @@ func simplexNoise2D(x:Double, y:Double) -> Double{
 }
 
 //3 Dimensional Simplex Noise
-func simplexNoise3D(x:Double, y:Double, z:Double) -> Double{
+func simplexNoise3D(_ x:Double, y:Double, z:Double) -> Double{
     
     let F3 = 0.333333333
     let G3 = 0.166666667
@@ -267,7 +267,7 @@ func simplexNoise3D(x:Double, y:Double, z:Double) -> Double{
 }
 
 //4 Dimensional Simplex Noise (not yet implemented)
-func simplexNoise4D(x:Double, y:Double, z:Double, w:Double) -> Double{
+func simplexNoise4D(_ x:Double, y:Double, z:Double, w:Double) -> Double{
    
     
 

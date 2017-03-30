@@ -18,7 +18,7 @@ extension SCNVector3: Vector {
         z = array[2]
     }
 
-    public func to4(w: CGFloat) -> SCNVector4 {
+    public func to4(_ w: CGFloat) -> SCNVector4 {
         return SCNVector4(x: x, y: y, z: z, w: w)
     }
 
@@ -103,11 +103,11 @@ public func *(left: Int, right: SCNVector3) -> SCNVector3 {
     return CGFloat(left) * right
 }
 
-public func *=(inout left: SCNVector3, right: CGFloat) {
+public func *=(left: inout SCNVector3, right: CGFloat) {
     left = left * right
 }
 
-public func *=(inout left: SCNVector3, right: Int) {
+public func *=(left: inout SCNVector3, right: Int) {
     left = left * right
 }
 
@@ -125,11 +125,11 @@ public func /(left: SCNVector3, right: Int) -> SCNVector3 {
     return left / CGFloat(right)
 }
 
-public func /=(inout left: SCNVector3, right: CGFloat) {
+public func /=(left: inout SCNVector3, right: CGFloat) {
     left = left / right
 }
 
-public func /=(inout left: SCNVector3, right: Int) {
+public func /=(left: inout SCNVector3, right: Int) {
     left = left / right
 }
 
@@ -143,7 +143,7 @@ public func -(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3(x: x, y: y, z: z)
 }
 
-public func -=(inout left: SCNVector3, right: SCNVector3) {
+public func -=(left: inout SCNVector3, right: SCNVector3) {
     left = left - right
 }
 
@@ -157,6 +157,6 @@ public func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3(x: x, y: y, z: z)
 }
 
-public func +=(inout left: SCNVector3, right: SCNVector3) {
+public func +=(left: inout SCNVector3, right: SCNVector3) {
     left = left + right
 }

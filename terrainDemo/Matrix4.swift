@@ -205,7 +205,7 @@ extension SCNMatrix4: Matrix {
             [m41, m42, m43, m44]]
     }
 
-    private var linearCGFloatArray: [CGFloat] {
+    fileprivate var linearCGFloatArray: [CGFloat] {
         return [m11, m12, m13, m14,
             m21, m22, m23, m24,
             m31, m32, m33, m34,
@@ -213,7 +213,7 @@ extension SCNMatrix4: Matrix {
     }
 }
 
-public func SCNMatrix4MakeColumns(x: SCNVector4, y: SCNVector4, z: SCNVector4, w: SCNVector4) -> SCNMatrix4 {
+public func SCNMatrix4MakeColumns(_ x: SCNVector4, y: SCNVector4, z: SCNVector4, w: SCNVector4) -> SCNMatrix4 {
     return SCNMatrix4(
         m11: x.x, m12: x.y, m13: x.z, m14: x.w,
         m21: y.x, m22: y.y, m23: y.z, m24: y.w,
@@ -291,11 +291,11 @@ public func *(left: Int, right: SCNMatrix4) -> SCNMatrix4 {
     return right * CGFloat(left)
 }
 
-public func *=(inout left: SCNMatrix4, right: CGFloat) {
+public func *=(left: inout SCNMatrix4, right: CGFloat) {
     left = left * right
 }
 
-public func *=(inout left: SCNMatrix4, right: Int) {
+public func *=(left: inout SCNMatrix4, right: Int) {
     left = left * right
 }
 
@@ -313,21 +313,21 @@ public func /(left: SCNMatrix4, right: Int) -> SCNMatrix4 {
     return left / CGFloat(right)
 }
 
-public func /=(inout left: SCNMatrix4, right: CGFloat) {
+public func /=(left: inout SCNMatrix4, right: CGFloat) {
     left = left / right
 }
 
-public func /=(inout left: SCNMatrix4, right: Int) {
+public func /=(left: inout SCNMatrix4, right: Int) {
     left = left / right
 }
 
 // https://bitbucket.org/eigen/eigen/src/968c30931d04a35c8b02d1bb386e690b45dc275c/Eigen/src/LU/Determinant.h?at=default#cl-75
-private func detHelper(matrix: SCNMatrix4, j: Int, k: Int, m: Int, n: Int) -> CGFloat {
+private func detHelper(_ matrix: SCNMatrix4, j: Int, k: Int, m: Int, n: Int) -> CGFloat {
     let a = (matrix[j, 0] * matrix[k, 1] - matrix[k, 0] * matrix[j, 1])
     let b = (matrix[m, 2] * matrix[n, 3] - matrix[n, 2] * matrix[m, 3])
     return a*b
 }
-public func det(m: SCNMatrix4) -> CGFloat {
+public func det(_ m: SCNMatrix4) -> CGFloat {
     return detHelper(m, j: 0, k: 1, m: 2, n: 3)
         - detHelper(m, j: 0, k: 2, m: 1, n: 3)
         + detHelper(m, j: 0, k: 3, m: 1, n: 2)
@@ -336,7 +336,7 @@ public func det(m: SCNMatrix4) -> CGFloat {
         + detHelper(m, j: 2, k: 3, m: 0, n: 1)
 }
 
-public func transpose(m: SCNMatrix4) -> SCNMatrix4 {
+public func transpose(_ m: SCNMatrix4) -> SCNMatrix4 {
     return SCNMatrix4(
         m11: m.m11, m12: m.m21, m13: m.m31, m14: m.m41,
         m21: m.m12, m22: m.m22, m23: m.m32, m24: m.m42,
@@ -344,17 +344,17 @@ public func transpose(m: SCNMatrix4) -> SCNMatrix4 {
         m41: m.m14, m42: m.m24, m43: m.m34, m44: m.m44)
 }
 
-public func inverse(m: SCNMatrix4) -> SCNMatrix4 {
+public func inverse(_ m: SCNMatrix4) -> SCNMatrix4 {
     // https://github.com/mattt/Surge/
 
-    var results = [CGFloat](count: 16, repeatedValue: 0.0)
+    var results = [CGFloat](repeating: 0.0, count: 16)
 
-    var grid = m.linearCGFloatArray
+    let grid = m.linearCGFloatArray
 
-    var ipiv = [__CLPK_integer](count: 16, repeatedValue: 0)
-    var lwork = __CLPK_integer(16)
-    var work = [CGFloat](count: Int(lwork), repeatedValue: 0.0)
-    var error: __CLPK_integer = 0
+    var ipiv = [__CLPK_integer](repeating: 0, count: 16)
+    let lwork = __CLPK_integer(16)
+    var work = [CGFloat](repeating: 0.0, count: Int(lwork))
+    let error: __CLPK_integer = 0
     var nc = __CLPK_integer(4)
 
 //    sgetrf_(&nc, &nc, (grid), &nc, &ipiv, &error)

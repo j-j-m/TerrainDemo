@@ -12,10 +12,10 @@ import SceneKit
 class TileGenerator: NSObject {
 
     var delegate:TileGeneratorDelegate?
-    var tileSize:CGSize = CGSizeMake(3000, 3000)
+    var tileSize:CGSize = CGSize(width: 1000, height: 1000)
     var tileDictionary:[String:TerrainTile] = Dictionary()
-    var lastReferencePoint:CGPoint = CGPointMake(0, 0)
-    var gridSize:CGFloat = 7
+    var lastReferencePoint:CGPoint = CGPoint(x: 0, y: 0)
+    var gridSize:CGFloat = 20
     var mutex:Bool = true
     override init(){
         super.init()
@@ -29,19 +29,19 @@ class TileGenerator: NSObject {
      
     }
     
-    func generateTilesForPosition(position:SCNVector3){
+    func generateTilesForPosition(_ position:SCNVector3){
        
         if(mutex){
         self.mutex=false
-        let qualityOfServiceClass = QOS_CLASS_USER_INTERACTIVE
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.userInteractive
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
         
-        let ref:CGPoint = CGPointMake(FASTFLOOR(position.x/self.tileSize.width), FASTFLOOR(-position.z/self.tileSize.height))
-      //  print("\(position) \(ref)")
+        let ref:CGPoint = CGPoint(x: FASTFLOOR(position.x/self.tileSize.width), y: FASTFLOOR(-position.z/self.tileSize.height))
+
             
         if(self.lastReferencePoint != ref){
-          //
+
             print(position)
             var count:Int = 0
             var newKeys:[String] = [String]()
@@ -49,14 +49,14 @@ class TileGenerator: NSObject {
             for i in Int(ref.x-self.gridSize)...Int(ref.x+self.gridSize){
                 for j in Int(ref.y-self.gridSize)...Int(ref.y+self.gridSize){
                    let refPoint = "\(i),\(j)"
-                    let point = CGPointMake(CGFloat(-i)*self.tileSize.width, CGFloat(-j)*self.tileSize.width)
+                    let point = CGPoint(x: CGFloat(-i)*self.tileSize.width, y: CGFloat(-j)*self.tileSize.width)
                     
                     if(self.tileDictionary[refPoint] == nil){
-                      count++
+                      count += 1
                         
                         newKeys.append(refPoint)
                         
-                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 100)
+                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 20)
                             self.tileDictionary[refPoint] = tile
                             self.delegate!.placeTile(tile)
                     }
@@ -73,14 +73,10 @@ class TileGenerator: NSObject {
             
             for k in keys{
                let badTile = self.tileDictionary[k]
-                self.tileDictionary.removeValueForKey(k)
+                self.tileDictionary.removeValue(forKey: k)
                 self.delegate!.removeTile(badTile!)
             }
-        
-           
-           // print("ref: \(ref), generating \(count) new tiles. resulting in \(self.tileDictionary.count) tiles")
-            
-          // print("newKeys: \(newKeys), oldKeys: \(oldKeys), count: \(count)")
+   
             self.lastReferencePoint = ref
         }
         
@@ -94,6 +90,6 @@ class TileGenerator: NSObject {
 }
 
 protocol TileGeneratorDelegate{
-    func placeTile(tile:TerrainTile)
-    func removeTile(tile:TerrainTile)
+    func placeTile(_ tile:TerrainTile)
+    func removeTile(_ tile:TerrainTile)
 }

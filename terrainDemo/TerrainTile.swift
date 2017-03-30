@@ -56,17 +56,17 @@ class TerrainTile: SCNNode {
         
         
         
-        let bundle = NSBundle.mainBundle()
-        let surfacePath = bundle.pathForResource("heightmap", ofType: "shader")
+        let bundle = Bundle.main
+        let surfacePath = bundle.path(forResource: "heightmap", ofType: "shader")
         
     //    let lightingPath = bundle.pathForResource("toon", ofType: "shader")        // toon shader for ships
         
         
         //reading
         do {
-            let text = try NSString(contentsOfFile: surfacePath!, encoding: NSUTF8StringEncoding)
+            let text = try NSString(contentsOfFile: surfacePath!, encoding: String.Encoding.utf8.rawValue)
             //  let text2 = try NSString(contentsOfFile: lightingPath!, encoding: NSUTF8StringEncoding)
-            mat.shaderModifiers = [SCNShaderModifierEntryPointSurface : text as String]
+            mat.shaderModifiers = [SCNShaderModifierEntryPoint.surface : text as String]
             
             
         }
@@ -77,15 +77,14 @@ class TerrainTile: SCNNode {
 
         
         //mat.diffuse.contents = checkerboard
-        mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20,20,20);
-        mat.diffuse.wrapT = SCNWrapMode.Repeat
-        mat.diffuse.wrapS = SCNWrapMode.Repeat
+       // mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20,20,20);
+        mat.diffuse.wrapT = SCNWrapMode.repeat
+        mat.diffuse.wrapS = SCNWrapMode.repeat
         
-        mat.shininess = 0.15
-        mat.fresnelExponent = 0.25
-        mat.doubleSided = false
-        mat.specular.contents = NSColor.whiteColor()
-        
+//        mat.shininess = 0.15
+//        mat.fresnelExponent = 0.25
+        mat.isDoubleSided = true
+        mat.specular.contents = NSColor.white
         terrainGeometry.materials = [mat]
         self.position = SCNVector3Make(-position.x, 10, position.y)
 //        self.rotation = SCNVector4Make(1, 0, 0, CGFloat( -M_PI_2 ))
@@ -107,7 +106,7 @@ class TerrainTile: SCNNode {
          fatalError("init(coder:) has not been implemented")
      }
     
-    func degToRad(deg: Float) -> CGFloat {
+    func degToRad(_ deg: Float) -> CGFloat {
         return CGFloat(deg / 180 * Float(M_PI))
     }
 }

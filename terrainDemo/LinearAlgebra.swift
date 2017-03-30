@@ -22,23 +22,23 @@ public protocol Comparable {
 
 public protocol Vector: Equatable, CustomStringConvertible, Copyable, Comparable {
     func +(lhs: Self, rhs: Self) -> Self
-    func +=(inout lhs: Self, rhs: Self)
+    func +=(lhs: inout Self, rhs: Self)
     func -(lhs: Self, rhs: Self) -> Self
-    func -=(inout lhs: Self, rhs: Self)
+    func -=(lhs: inout Self, rhs: Self)
 
     func *(lhs: Self, rhs: Self) -> CGFloat
 
     func *(lhs: CGFloat, rhs: Self) -> Self
     func *(lhs: Self, rhs: CGFloat) -> Self
-    func *=(inout lhs: Self, rhs: CGFloat)
+    func *=(lhs: inout Self, rhs: CGFloat)
     func *(lhs: Int, rhs: Self) -> Self
     func *(lhs: Self, rhs: Int) -> Self
-    func *=(inout lhs: Self, rhs: Int)
+    func *=(lhs: inout Self, rhs: Int)
 
     func /(lhs: Self, rhs: CGFloat) -> Self
-    func /=(inout lhs: Self, rhs: CGFloat)
+    func /=(lhs: inout Self, rhs: CGFloat)
     func /(lhs: Self, rhs: Int) -> Self
-    func /=(inout lhs: Self, rhs: Int)
+    func /=(lhs: inout Self, rhs: Int)
 
     func ×(lhs: Self, rhs: Self) -> Self
 }
@@ -46,32 +46,32 @@ public protocol Vector: Equatable, CustomStringConvertible, Copyable, Comparable
 public protocol Matrix: Equatable, CustomStringConvertible, Copyable, Comparable {
     func *(lhs: CGFloat, rhs: Self) -> Self
     func *(lhs: Self, rhs: CGFloat) -> Self
-    func *=(inout lhs: Self, rhs: CGFloat)
+    func *=(lhs: inout Self, rhs: CGFloat)
     func *(lhs: Int, rhs: Self) -> Self
     func *(lhs: Self, rhs: Int) -> Self
-    func *=(inout lhs: Self, rhs: Int)
+    func *=(lhs: inout Self, rhs: Int)
 
     func /(lhs: Self, rhs: CGFloat) -> Self
-    func /=(inout lhs: Self, rhs: CGFloat)
+    func /=(lhs: inout Self, rhs: CGFloat)
     func /(lhs: Self, rhs: Int) -> Self
-    func /=(inout lhs: Self, rhs: Int)
+    func /=(lhs: inout Self, rhs: Int)
 }
 
-infix operator × { } // Cross product
+infix operator × // Cross product
 
-infix operator ~= { } // Equivalent
+infix operator ~= // Equivalent
 
-infix operator !~= { } // Not equivalent
+infix operator !~= // Not equivalent
 
-public func cross<T:Vector> (a: T, b: T) -> T {
+public func cross<T:Vector> (_ a: T, b: T) -> T {
     return a × b
 }
 
-public func magnitude<T: Vector> (vec: T) -> CGFloat {
+public func magnitude<T: Vector> (_ vec: T) -> CGFloat {
     return sqrt(vec * vec)
 }
 
-public func normalize<T: Vector> (vec: T) -> T {
+public func normalize<T: Vector> (_ vec: T) -> T {
     let vmag = magnitude(vec)
     if vmag == 0 {
         fatalError("Zero vector provided to normalize")
@@ -79,7 +79,7 @@ public func normalize<T: Vector> (vec: T) -> T {
     return vec / vmag
 }
 
-public func angle<T:Vector> (left: T, right: T) -> CGFloat {
+public func angle<T:Vector> (_ left: T, right: T) -> CGFloat {
     let ml = magnitude(left)
     let mr = magnitude(right)
     if ml == 0 || mr == 0 {
@@ -99,7 +99,7 @@ public func angle<T:Vector> (left: T, right: T) -> CGFloat {
  *            { | /
  *
  */
-public func component<T:Vector> (a: T, b: T) -> CGFloat {
+public func component<T:Vector> (_ a: T, b: T) -> CGFloat {
     let bmag = magnitude(b)
     if bmag == 0 {
         fatalError("Zero vector provided to component")
@@ -109,7 +109,7 @@ public func component<T:Vector> (a: T, b: T) -> CGFloat {
 
 /* proj_{b} a 
  */
-public func projection<T:Vector> (a: T, b: T) -> T {
+public func projection<T:Vector> (_ a: T, b: T) -> T {
     let magb = magnitude(b)
     if magb == 0 {
         fatalError("Zero vector provided to projection")
