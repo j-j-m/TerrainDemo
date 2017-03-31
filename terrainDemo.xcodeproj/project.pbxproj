@@ -55,7 +55,7 @@
 /* Begin PBXFileReference section */
 		A04735181BFE5F11008C65F0 /* rain.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = rain.scnp; sourceTree = "<group>"; };
 		A04735191BFE5F11008C65F0 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		A0A4B6E51BFA4DED00441855 /* TerrainDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerrainDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A4B6E51BFA4DED00441855 /* TerrainDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerrainDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A4B6E81BFA4DED00441855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A4B6EA1BFA4DED00441855 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A0A4B6EC1BFA4DED00441855 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		A0A4B6E61BFA4DED00441855 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A0A4B6E51BFA4DED00441855 /* TerrainDemo.temp_caseinsensitive_rename.app */,
+				A0A4B6E51BFA4DED00441855 /* TerrainDemo.app */,
 				A0A4B6FA1BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */,
 				A0A4B7051BFA4DEE00441855 /* TerrainDemo.temp_caseinsensitive_rename.xctest */,
 			);
@@ -239,7 +239,7 @@
 			);
 			name = terrainDemo;
 			productName = terrainDemo;
-			productReference = A0A4B6E51BFA4DED00441855 /* TerrainDemo.temp_caseinsensitive_rename.app */;
+			productReference = A0A4B6E51BFA4DED00441855 /* TerrainDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A0A4B6F91BFA4DEE00441855 /* terrainDemoTests */ = {
@@ -511,7 +511,7 @@
 				INFOPLIST_FILE = terrainDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemo;
-				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = TerrainDemo;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -524,7 +524,7 @@
 				INFOPLIST_FILE = terrainDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.terrainDemo;
-				PRODUCT_NAME = TerrainDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = TerrainDemo;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
