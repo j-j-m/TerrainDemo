@@ -22,6 +22,7 @@ _surface.diffuse = vec4(0.8,0.5,0.0,1.0);
 else if(mag<360){
 _surface.diffuse = vec4((mag)/800,0.3,0.0,1.0);
 
+
 }
 else{
 _surface.diffuse = vec4((mag)/500,(mag)/500,(mag)/500,1.0);

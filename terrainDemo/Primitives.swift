@@ -187,7 +187,7 @@ func terrain(_ size:CGSize, noiseOffset:CGPoint, segmentCount:Int, amplitude:CGF
         (normal_src.data as NSData).getBytes(&normalArray, range: byteRange)
         
         // At this point you can read the data from the float array
-         let octaves = 10
+         let octaves = 12
         
         //  var factor:Double = Double(norm3D(array[0], y:array[1] , z: array[2]))
         var factor = 10.0

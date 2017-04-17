@@ -7,44 +7,130 @@
 //
 
 import SceneKit
+import SpriteKit
 import QuartzCore
 import ModelIO
 
+
 class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDelegate, TileGeneratorDelegate {
     
-    let sky = MDLSkyCubeTexture(name: nil,
+    
+    var sky = MDLSkyCubeTexture(name: nil,
         channelEncoding: MDLTextureChannelEncoding.uInt8,
-        textureDimensions: [Int32(1080), Int32(1080)],
+        textureDimensions: [Int32(160), Int32(160)],
         turbidity: 0.5,
-        sunElevation: 0.6,
-        upperAtmosphereScattering: 0.5,
-        groundAlbedo: 0.4)
+        sunElevation: 0.5,
+        upperAtmosphereScattering: 1.0,
+        groundAlbedo: 1.0)
     
+    let queue = DispatchQueue(label: "TextureUpdateQueue")
+    var busy =  false // indicates MDLSkyCubeTexture is updating
+    var changePending = false // indicates a pending user change
     
-    
-    let scene:SCNScene = SCNScene()
+    let scene:SCNScene = TerrestrialScene()
+    let spaceScene:SCNScene = SpaceScene()
     let cameraNode:SCNNode = SCNNode()
-    var tileGenerator:TileGenerator = TileGenerator() //this is dumb TODO: make this class nullable
+    var tileGenerator:TileGenerator = TileGenerator() 
     var isMoving = 0
+    var movingVertical = false
+    let upperAtmosphereElevation:CGFloat = 2000.0
+    let spaceElevation:CGFloat = 3000.0
+       
+    
+    var isInUpperAtmosphere = false {
+        didSet {
+            
+            guard !busy else
+            {
+                changePending = true
+                return
+            }
+            
+            busy = true
+            
+            
+            queue.async{
+                if self.isInUpperAtmosphere {
+                    let p = (self.spaceElevation - self.cameraNode.position.y)/(self.spaceElevation-self.upperAtmosphereElevation)
+                    
+                    self.sky.turbidity = Float(p)/2
+                    self.sky.upperAtmosphereScattering = Float(p)
+                    self.sky.groundAlbedo = Float(p)
+                    self.sky.update()
+                    self.scene.background.contents = self.sky.imageFromTexture()?.takeUnretainedValue()
+                }
+                else {
+                    self.sky.turbidity = 0.5
+                    self.sky.upperAtmosphereScattering = 1.0
+                    self.sky.update()
+                    self.scene.background.contents = self.sky.imageFromTexture()?.takeUnretainedValue()
+                }
+                
+                DispatchQueue.main.async {
+                    self.busy = false
+                    
+                    if self.changePending
+                    {
+                        self.changePending = false
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    
+        var isInSpace = false {
+            didSet {
+                
+                var transition = SKTransition.crossFade(withDuration: 0.1)
+                transition.pausesIncomingScene = false
+                transition.pausesOutgoingScene = false
+                
+                if isInSpace && oldValue == false {
+                    self.cameraNode.camera?.focalBlurRadius = 0.0
+                    gameView.present(spaceScene, with: transition, incomingPointOfView: self.cameraNode) {
+                        print("trans to space")
+                    }
+                }
+                else if !isInSpace && oldValue == true {
+                    gameView.present(scene, with: transition, incomingPointOfView: self.cameraNode) {
+                        print("trans to planet")
+                    }
+                }
+            }
+        }
     
     @IBOutlet weak var gameView: GameView!
     
     override func awakeFromNib(){
         
-        // create a new scene
-       
-        
-        
         
         let camera:SCNCamera = SCNCamera()
         camera.zNear = 0.1
         camera.zFar = 40000
-        sky.groundColor = CGColor(red: 0.3,green: 0.1,blue: 0.8,alpha: 1.0)
+        camera.focalDistance = 5.0
+        camera.focalSize = 4.5
+        camera.focalBlurRadius = 12.0
+        
+        
+        //camera.aperture = 0.18
+        
+        
+        if #available(OSX 10.12, *) {
+           
+            camera.bloomIntensity = 1.4
+            camera.bloomBlurRadius = 1.0
+//            camera.colorFringeStrength = 1.0
+//            camera.colorFringeIntensity = 1.0
+           // camera.wantsHDR = true
+        }
+        sky.groundColor = CGColor(red: 0.1,green: 0.7,blue: 0.8,alpha: 1.0)
         
         
         cameraNode.camera = camera
       //  cameraNode.addParticleSystem(SCNParticleSystem(named: "rain", inDirectory: nil)!)
-        cameraNode.position = SCNVector3Make(1500,600,1500)
+        cameraNode.position = SCNVector3Make(0,600,0)
         tileGenerator = TileGenerator(position: CGPoint(x: cameraNode.position.x,y: cameraNode.position.z), delegate: self)
         //cameraNode.rotation = SCNVector4Make(1, 0, 0, CGFloat(-M_PI_2))
       
@@ -99,28 +185,65 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
         
         self.gameView.isPlaying = true
         self.gameView.antialiasingMode = SCNAntialiasingMode.multisampling16X
+        
+        
+        NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) {
+            self.flagsChanged(with: $0)
+            return $0
+        }
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+            self.keyDown(with: $0)
+            return $0
+        }
+        NSEvent.addLocalMonitorForEvents(matching: .keyUp) {
+            self.keyUp(with: $0)
+            return $0
+        }
         gameView.window?.makeFirstResponder(gameView)
+        
+        
+        ControlHandler(with: cameraNode){
+            self.tileGenerator.generateTilesForPosition(self.cameraNode.position)
+        }
+        
+        
+        
+        
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         let b = Basis(node: cameraNode).zAxis
-        
-        if(Keyboard.sharedKeyboard.justPressed(Key.down)){ isMoving = -1 }
-        else if(Keyboard.sharedKeyboard.justPressed(Key.up)){ isMoving = 1 }
-        if(Keyboard.sharedKeyboard.justReleased(Key.up) || Keyboard.sharedKeyboard.justReleased(Key.down)){ isMoving = 0; print("released")  }
-        
-        
-        
+
         
         
         if(isMoving != 0){
-            cameraNode.position.x -= b.x*15*CGFloat(isMoving)
-            cameraNode.position.z -= b.z*15*CGFloat(isMoving)
+            if !movingVertical {
+            cameraNode.position.x -= b.x*10*CGFloat(isMoving)
+            cameraNode.position.z -= b.z*10*CGFloat(isMoving)
+            }
+            else {
+                cameraNode.position.y += 5*CGFloat(isMoving)
+                if cameraNode.position.y > spaceElevation {
+                    isInSpace = true
+                }
+                else if cameraNode.position.y > upperAtmosphereElevation {
+                    isInUpperAtmosphere = true
+                    isInSpace = false
+                }
+                else {
+                    isInSpace = false
+                   isInUpperAtmosphere = false
+                }
+//                print(cameraNode.position.y)
+               // sky.update()
+            }
         }
         
        
         tileGenerator.generateTilesForPosition(cameraNode.position)
+        
+        
     }
     
     
@@ -139,8 +262,8 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
     func rotateCamByAmount(_ amount:CGSize){
         
     
-    let xAngle = SCNMatrix4MakeRotation(degToRad(0), 1, 0, 0)
-    let yAngle = SCNMatrix4MakeRotation(degToRad(Float(amount.width)), 0, 1, 0)
+    let xAngle = SCNMatrix4MakeRotation(degToRad(Float(amount.width)), 1, 0, 0)
+    let yAngle = SCNMatrix4MakeRotation(degToRad(0), 0, 1, 0)
     let zAngle = SCNMatrix4MakeRotation(degToRad(0), 0, 0, 1)
     
     let rotationMatrix = SCNMatrix4Mult(SCNMatrix4Mult(xAngle, yAngle), zAngle)
@@ -174,4 +297,37 @@ class GameViewController: NSViewController, SCNSceneRendererDelegate, GameViewDe
 
     }
    
+    override func keyDown(with event: NSEvent) {
+        Keyboard.sharedKeyboard.handleKey(event, isDown: true)
+        
+        if(Keyboard.sharedKeyboard.justPressed(Key.s)){ isMoving = -1 }
+        else if(Keyboard.sharedKeyboard.justPressed(Key.w)){ isMoving = 1 }
+        
+        if (event.modifierFlags.contains(NSEventModifierFlags.option)){
+            movingVertical = true
+        }
+        else {
+            movingVertical = false
+        }
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        
+        Keyboard.sharedKeyboard.handleKey(event, isDown: false)
+        print(event.keyCode)
+        if(Keyboard.sharedKeyboard.justReleased(Key.w) || Keyboard.sharedKeyboard.justReleased(Key.s)){
+            isMoving = 0
+            print("released")
+        }
+        
+        
+    }
+    
+    override func flagsChanged(with event: NSEvent) {
+        print(event)
+      //  Keyboard.sharedKeyboard.handleKey(event, isDown: false)
+        
+    }
+
 }
+

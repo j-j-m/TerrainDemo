@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A0A4B6E41BFA4DED00441855"
-               BuildableName = "TerrainDemo.temp_caseinsensitive_rename.app"
+               BuildableName = "TerrainDemo.app"
                BlueprintName = "terrainDemo"
-               ReferencedContainer = "container:TerrainDemo.xcodeproj">
+               ReferencedContainer = "container:terrainDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "A0A4B6F91BFA4DEE00441855"
                BuildableName = "TerrainDemo.temp_caseinsensitive_rename.xctest"
                BlueprintName = "terrainDemoTests"
-               ReferencedContainer = "container:TerrainDemo.xcodeproj">
+               ReferencedContainer = "container:terrainDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "A0A4B7041BFA4DEE00441855"
                BuildableName = "TerrainDemo.temp_caseinsensitive_rename.xctest"
                BlueprintName = "terrainDemoUITests"
-               ReferencedContainer = "container:TerrainDemo.xcodeproj">
+               ReferencedContainer = "container:terrainDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0A4B6E41BFA4DED00441855"
-            BuildableName = "TerrainDemo.temp_caseinsensitive_rename.app"
+            BuildableName = "TerrainDemo.app"
             BlueprintName = "terrainDemo"
-            ReferencedContainer = "container:TerrainDemo.xcodeproj">
+            ReferencedContainer = "container:terrainDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0A4B6E41BFA4DED00441855"
-            BuildableName = "TerrainDemo.temp_caseinsensitive_rename.app"
+            BuildableName = "TerrainDemo.app"
             BlueprintName = "terrainDemo"
-            ReferencedContainer = "container:TerrainDemo.xcodeproj">
+            ReferencedContainer = "container:terrainDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A0A4B6E41BFA4DED00441855"
-            BuildableName = "TerrainDemo.temp_caseinsensitive_rename.app"
+            BuildableName = "TerrainDemo.app"
             BlueprintName = "terrainDemo"
-            ReferencedContainer = "container:TerrainDemo.xcodeproj">
+            ReferencedContainer = "container:terrainDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

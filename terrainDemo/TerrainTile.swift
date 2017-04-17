@@ -53,9 +53,6 @@ class TerrainTile: SCNNode {
        // let checkerboard:NSImage = NSImage(named:"checkerboard.png")!
         
         
-        
-        
-        
         let bundle = Bundle.main
         let surfacePath = bundle.path(forResource: "heightmap", ofType: "shader")
         
@@ -81,13 +78,12 @@ class TerrainTile: SCNNode {
         mat.diffuse.wrapT = SCNWrapMode.repeat
         mat.diffuse.wrapS = SCNWrapMode.repeat
         
-//        mat.shininess = 0.15
-//        mat.fresnelExponent = 0.25
+
         mat.isDoubleSided = true
         mat.specular.contents = NSColor.white
         terrainGeometry.materials = [mat]
         self.position = SCNVector3Make(-position.x, 10, position.y)
-//        self.rotation = SCNVector4Make(1, 0, 0, CGFloat( -M_PI_2 ))
+
         
         let xAngle = SCNMatrix4MakeRotation(degToRad(90), 1, 0, 0)
         let yAngle = SCNMatrix4MakeRotation(degToRad(0), 0, 1, 0)

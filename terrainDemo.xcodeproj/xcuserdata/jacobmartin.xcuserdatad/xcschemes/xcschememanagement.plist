@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Controller.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>terrainDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>A0A030951E99D88900640A19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A0A4B6E41BFA4DED00441855</key>
 		<dict>
 			<key>primary</key>

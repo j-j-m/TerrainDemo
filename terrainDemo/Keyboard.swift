@@ -150,9 +150,12 @@ class Keyboard {
     func handleKey(_ event: NSEvent, isDown: Bool) {
         if (isDown) {
             curr.keys[Int(event.keyCode)] = true
+            prev.keys[Int(event.keyCode)] = false
         } else {
+            prev.keys[Int(event.keyCode)] = true
             curr.keys[Int(event.keyCode)] = false
         }
+        //print(event.keyCode)
        // print(curr.keys[Int(event.keyCode)])
     }
     

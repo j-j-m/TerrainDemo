@@ -15,6 +15,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        
+        DispatchQueue.global().async {
+
+            try! GamePadServer.shared.start()
+            print("Swift Echo Server Sample")
+            print("Connect with a command line window by entering 'telnet 127.0.0.1 \(1337)'")
+            
+       
+        }
     }
     
 }
+
+

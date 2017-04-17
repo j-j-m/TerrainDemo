@@ -29,6 +29,8 @@ class TileGenerator: NSObject {
      
     }
     
+    
+    //needs an update... this will become easier lighter after I create the heightmap for each tile with metal
     func generateTilesForPosition(_ position:SCNVector3){
        
         if(mutex){
@@ -56,7 +58,7 @@ class TileGenerator: NSObject {
                         
                         newKeys.append(refPoint)
                         
-                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 20)
+                           let tile = TerrainTile(size: self.tileSize,position:point, elevation: 5, seaLevel: 0, segmentCount: 40)
                             self.tileDictionary[refPoint] = tile
                             self.delegate!.placeTile(tile)
                     }

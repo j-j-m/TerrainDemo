@@ -1,0 +1,6 @@
+framework module Pods_Controller {
+  umbrella header "Pods-Controller-umbrella.h"
+
+  export *
+  module * { export * }
+}
